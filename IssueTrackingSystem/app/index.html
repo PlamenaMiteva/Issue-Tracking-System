@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="issueTrackingSystem" class="no-js">
+ <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Issue Tracking System</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">   
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">   
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">    
+    <link rel="stylesheet" href="app.css">
+    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+    <div class="bs-component" id="home-navbar">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid" id="home-navbar-container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#home-navbar-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" id="navbar-logo" href="#/">Issue Tracking System</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="home-navbar-2">
+                    <ul class="nav navbar-nav" id="home-navbar-ul">
+                        <li id="home-li"><a href="#/">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid">
+        <div ng-view></div>
+    </div>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="app.js"></script>
+    <script src="home/home-controller.js"></script>
+    <script src="common/main-controller.js"></script>
+    <script src="users/authentication.js"></script>
+    <script src="users/identity.js"></script>  
+    <script src="users/dashboard.js"></script>
+    <script src="users/dashboard-controller.js"></script> 
+    <script src="projects/project-controller.js"></script> 
+    <script src="projects/project.js"></script>      
+    <script src="components/version/version.js"></script>
+    <script src="components/version/version-directive.js"></script>
+    <script src="components/version/interpolate-filter.js"></script>
+</body>
+</html>

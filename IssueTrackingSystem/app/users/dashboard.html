@@ -1,0 +1,30 @@
+<div class="jumbotron" style="height: 100%">
+    <h1 id="system-dashboard">System Dashboard</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Issue</td>
+                <td>Description</td>
+                <td>Project</td>
+                <td>Due Date</td>                
+            </tr>
+        </thead>
+        <tbody ng-repeat="issue in issues | orderBy:'-DueDate'" ng-controller='BoardCtrl'>
+            <tr>
+                <td><a ng-href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
+                <td>{{issue.Description}}</td>
+                <td><a ng-href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a></td>
+                <td>{{issue.DueDate| date:'dd/MM/yyyy'}}</td>                
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <ul class="pagination pagination-lg">
+            <li class="disabled"><a href="#"><<</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">>></a></li>
+        </ul>
+    </div>
+</div> 
