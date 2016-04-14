@@ -89,4 +89,11 @@ thead{
     font-weight: bold;    
 }
 
+#page-button{
+    margin-left: 5px;
+}
+
+#dashboard-pagination{
+    margin-top: 40px;
+}
 

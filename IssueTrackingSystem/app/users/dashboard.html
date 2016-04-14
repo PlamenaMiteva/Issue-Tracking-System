@@ -17,14 +17,12 @@
                 <td>{{issue.DueDate| date:'dd/MM/yyyy'}}</td>                
             </tr>
         </tbody>
-    </table>
-    <div class="text-center">
-        <ul class="pagination pagination-lg">
-            <li class="disabled"><a href="#"><<</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">>></a></li>
+    </table>    
+    <div class="text-center" id="dashboard-pagination">
+        <ul class="pagination-lg">
+            <li class="btn btn-primary" ng-click='previousPage()'>Previous</li>
+            <li class="btn btn-primary" id="page-button" ng-model="page" ng-repeat="page in pageArray" ng-click='getCurrentPage(page)'>{{page}}</li>
+            <li class="btn btn-primary" ng-click='nextPage()'>Next</li>
         </ul>
     </div>
 </div> 
