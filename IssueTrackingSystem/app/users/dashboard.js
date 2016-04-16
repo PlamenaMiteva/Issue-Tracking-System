@@ -12,7 +12,7 @@ angular.module('issueTrackingSystem.users.dashboard', [])
                     
                     data = "Bearer " + localStorage['accessToken'];                    
                 
-                    $http.get(BASE_URL + 'Issues/me?pageSize=' + pageSize + '&pageNumber=' + pageNumber + '&orderBy=DueDate', { headers: { 'Authorization': data } })
+                    $http.get(BASE_URL + 'Issues/me?pageSize=' + pageSize + '&pageNumber=' + pageNumber + '&orderBy=DueDate desc', { headers: { 'Authorization': data } })
                             .then(function (result) {         
                                 deferred.resolve(result);                                
                             });  

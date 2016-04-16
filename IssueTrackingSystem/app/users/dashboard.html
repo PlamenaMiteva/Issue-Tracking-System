@@ -1,4 +1,4 @@
-<div class="jumbotron" style="height: 100%">
+    <div class="jumbotron" style="height: 100%">
     <h1 id="system-dashboard">System Dashboard</h1>
     <table class="table table-striped">
         <thead>
@@ -9,7 +9,7 @@
                 <td>Due Date</td>                
             </tr>
         </thead>
-        <tbody ng-repeat="issue in issues | orderBy:'-DueDate'" ng-controller='BoardCtrl'>
+        <tbody ng-repeat="issue in issues" ng-controller='BoardCtrl'>
             <tr>
                 <td><a ng-href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
                 <td>{{issue.Description}}</td>
@@ -25,4 +25,6 @@
             <li class="btn btn-primary" ng-click='nextPage()'>Next</li>
         </ul>
     </div>
-</div> 
+</div>
+    </div>
+<!--<tbody ng-repeat="issue in issues | orderBy:'-DueDate'" ng-controller='BoardCtrl'>--!>

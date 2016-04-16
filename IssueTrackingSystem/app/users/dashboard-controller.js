@@ -3,11 +3,11 @@
 angular.module('issueTrackingSystem.users.board', [
         'issueTrackingSystem.users.dashboard'
 ])
-    .config(['$routeProvider', function ($routeProvider) {
+    .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/dashboard', {
             templateUrl: 'users/dashboard.html',
             controller: 'BoardCtrl'
-        })
+        });
     }])
     .controller('BoardCtrl', [
         '$scope',
@@ -16,7 +16,7 @@ angular.module('issueTrackingSystem.users.board', [
         function ($scope, $location, dashboard) {
 
             $scope.pageNumber= 1;
-            $scope.pageSize = 3;
+            $scope.pageSize = 10;
             $scope.pageArray = [];            
            
             dashboard.showUserDashboard($scope.pageSize, $scope.pageNumber)

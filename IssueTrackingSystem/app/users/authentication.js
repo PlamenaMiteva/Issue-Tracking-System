@@ -12,6 +12,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
                     $http.post(BASE_URL + 'api/Account/Register', user)
                         .then(function (response) {
                             deferred.resolve(response.data);
+                            sessionStorage['currentUser'] = JSON.stringify(response.data);
                         }, function (error) {
 
                         });
@@ -25,7 +26,8 @@ angular.module('issueTrackingSystem.users.authentication', [])
                     
                         var response = $http.post(BASE_URL + 'api/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })                   
                         .then(function (response) {
-                            localStorage['accessToken'] = response.data['access_token'];                           
+                            token = response.data['access_token'];
+                            sessionStorage['currentUser'] = JSON.stringify(response.data);
                             //data = "Bearer " + accessToken;
                             //$http.get(BASE_URL + 'projects', { headers: { 'Authorization': data } }).then(function (response) {
                             //    var projects = response.data;
@@ -43,10 +45,16 @@ angular.module('issueTrackingSystem.users.authentication', [])
 
                 }
 
+                function isLoggedIn() {
+                    return true;
+                    //return sessionStorage['currentUser'] != undefined;
+                }
+
                 return {
                     token: token,
                     registerUser: registerUser,
                     loginUser: loginUser,
-                    logout: logout
+                    logout: logout,
+                    isLoggedIn: isLoggedIn
                 }
             }]);

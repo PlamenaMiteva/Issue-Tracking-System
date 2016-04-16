@@ -42,7 +42,7 @@
 #login-form, #register-form{
     background-color: #ecf0f1;
     padding: 20px;
-    height: 400px;
+    height: 430px;
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
@@ -77,6 +77,9 @@ a, a:hover, a:active{
     color: #15a589;
     font-weight: bold;
     text-align: center;
+}
+.error-message{
+    color:red;
 }
 
 #system-dashboard{
