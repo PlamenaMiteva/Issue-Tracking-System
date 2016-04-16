@@ -8,7 +8,7 @@ angular.module('issueTrackingSystem.project', [])
                 function getProjectById(id) {
                     var deferred = $q.defer();                   
                     
-                    data = "Bearer " + localStorage['accessToken'];
+                    data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
                     
                 
                     $http.get(BASE_URL + 'Projects/' + id, { headers: { 'Authorization': data } })
@@ -22,7 +22,7 @@ angular.module('issueTrackingSystem.project', [])
                 function getProjectIssues(id) {
                     var deferred = $q.defer();
 
-                    data = "Bearer " + localStorage['accessToken'];
+                    data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
 
 
                     $http.get(BASE_URL + 'Projects/' + id + '/Issues', { headers: { 'Authorization': data } })

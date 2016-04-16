@@ -58,9 +58,11 @@ a, a:hover, a:active{
   border-color: #15a589;  
 }
 
-#project-panel{
+#project-panel, #issue-panel, #status-panel{
     background-color:#15a589;
 }
+
+.list-group {line-height:30px}
 
 #login-btn, #register-btn{
     width: 100%;
