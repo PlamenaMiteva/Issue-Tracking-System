@@ -34,7 +34,6 @@ angular.module('issueTrackingSystem.issue', [])
                     $http.put(BASE_URL + 'Issues/' + id, issueData, { headers: { 'Authorization': data } })
                         .then(function(result) {
                             deferred.resolve(result);
-                            console.log(result);
                         });
 
                     return deferred.promise;

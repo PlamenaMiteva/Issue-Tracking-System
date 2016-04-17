@@ -1,0 +1,45 @@
+<div class="row" ng-controller='EditProjectCtrl'>
+    <div class="jumbotron">
+        <h1 id="project-details">Edit Project Details</h1>
+    </div>
+    <div class="col-sm-9 col-md-6 col-lg-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading" id="issue-panel">
+                <h3 class="panel-title">{{project.ProjectKey}}</h3>
+            </div>
+            <div class="panel-body">
+                <form name="editProjectForm">
+                    <label for="project-name">Title</label>
+                    <input type="text" name = "project-name" id="project-name" required="required" ng-model="newProject.Name" placeholder ="{{project.Name}}" class="form-control" />
+                    <br />
+                    <label for="project-description">Description</label>
+                    <input type="text" name = "project-description" id="project-description" required="required" ng-model="newProject.Description" placeholder ="{{project.Description}}" class="form-control" />
+                    <br />
+                    <label for="project-lead">Project Manager</label>
+                    <select class="form-control" id="project-lead" name="project-lead" ng-model="newProject.LeadId" required>
+                        <option ng-repeat="user in users" value="{{user.Id}}">
+                            {{user.Username}}
+                        </option>
+                    </select>
+                    <br />
+                    <label for="project-priority">Priority</label>
+                    <select class="form-control" id="project-priority" name="project-priority" ng-model="newProject.PriorityId" required>
+                        <option ng-repeat="priority in project.Priorities" value="{{priority.Id}}">
+                            {{priority.Name}}
+                        </option>
+                    </select>
+                    <br />
+                    <div ng-if="project.Labels.length > 0">
+                        <label for="labels">Labels</label>
+                        <div id="labels" ng-repeat="label in project.Labels">
+                            <input type="text" ng-model="label.Name" class="form-control" placeholder ={{label.Name}} />
+                            <br>
+                        </div>
+                    </div>
+                    <br>
+                    <button class="btn btn-primary" id="edit-project-btn" ng-disabled="editProjectForm.$invalid" ng-click="editProject(project.Id, newProject, project.Labels)">EDIT</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

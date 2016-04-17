@@ -3,13 +3,11 @@ angular.module('issueTrackingSystem.project', [])
             '$http',
             '$q',            
             'BASE_URL',            
-            function ($http, $q, BASE_URL) {               
+            function ($http, $q, BASE_URL) {
+                data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
 
                 function getProjectById(id) {
-                    var deferred = $q.defer();                   
-                    
-                    data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
-                    
+                    var deferred = $q.defer();
                 
                     $http.get(BASE_URL + 'Projects/' + id, { headers: { 'Authorization': data } })
                             .then(function(result) {
@@ -22,9 +20,6 @@ angular.module('issueTrackingSystem.project', [])
                 function getProjectIssues(id) {
                     var deferred = $q.defer();
 
-                    data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
-
-
                     $http.get(BASE_URL + 'Projects/' + id + '/Issues', { headers: { 'Authorization': data } })
                             .then(function (result) {
                                 deferred.resolve(result);
@@ -32,10 +27,23 @@ angular.module('issueTrackingSystem.project', [])
 
                     return deferred.promise;
                 }
+
+                function editProject(id, projectData) {
+                    var deferred = $q.defer();
+
+                    $http.put(BASE_URL + 'projects/' + id, projectData, { headers: { 'Authorization': data } })
+                        .then(function(result) {
+                            deferred.resolve(result);
+                            console.log(result);
+                        });
+
+                    return deferred.promise;
+                }
                
                 return {
                     getProjectById: getProjectById,
-                    getProjectIssues: getProjectIssues
+                    getProjectIssues: getProjectIssues,
+                    editProject : editProject
                 }
             }]);
 

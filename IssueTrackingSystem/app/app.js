@@ -10,6 +10,7 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.users.authentication',
         'issueTrackingSystem.users.usersService',
         'issueTrackingSystem.projects',
+        'issueTrackingSystem.edit-project',
         'issueTrackingSystem.project',
         'issueTrackingSystem.issues',
         'issueTrackingSystem.issue', 

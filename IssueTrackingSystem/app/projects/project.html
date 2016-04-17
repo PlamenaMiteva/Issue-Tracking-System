@@ -25,6 +25,8 @@
                             <b>Priorities: </b><span ng-repeat="priority in project.Priorities">{{priority.Name}}{{$last ? '' : ', '}}</span>
                         </li>
                     </ul>
+                    <a href="#/projects/{{project.Id}}/edit"><button class="btn btn-primary" ng-if="isLead">Edit</button></a>
+                    <button class="btn btn-primary" ng-if="isLead">Add</button>
                 </div>
             </div>
         </div>
