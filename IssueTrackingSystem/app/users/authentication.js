@@ -46,8 +46,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 }
 
                 function isLoggedIn() {
-                    return true;
-                    //return sessionStorage['currentUser'] != undefined;
+                   return sessionStorage['currentUser'] != undefined;
                 }
 
                 return {

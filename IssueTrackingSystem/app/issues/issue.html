@@ -1,6 +1,6 @@
 <div class="row">
     <div class="jumbotron" style="height: 100%">
-        <h1 id="project-details">Issue Details</h1>
+        <h1 id="issue-details">Issue Details</h1>
     </div>
         <div class="col-sm-9 col-md-6 col-lg-8">
             <div class="panel panel-primary">
@@ -37,23 +37,8 @@
                             <b>Labels: </b><span ng-repeat="label in issue.Labels">{{label.Name}}{{$last ? '' : ', '}}</span>
                         </li>
                     </ul>
-                    <button class="btn btn-primary" ng-if="isLead">Edit</button>
+                    <a href="#/issues/{{issue.Id}}/edit"><button class="btn btn-primary">Edit</button></a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-3 col-md-6 col-lg-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading" id="status-panel">
-                    <h3 class="panel-title">Available Statuses</h3>
-                </div>
-                <div class="panel-body">
-                    <ul class="list-group" ng-repeat="status in issue.AvailableStatuses">
-                        <li class="list-group-item clearfix">
-                            -----{{status.Name}}
-                            <button class="btn btn-primary btn pull-right" ng-if="isAssignee">Change</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-</div>
 </div>

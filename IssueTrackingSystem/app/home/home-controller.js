@@ -17,11 +17,7 @@ angular.module('issueTrackingSystem.home', ['ngRoute'])
 
             $scope.login = function (user) {
                 authentication.loginUser(user)
-                    .then(function (loggedInUser) {
-                        console.log(authentication.isLoggedIn());
-                        //dashboard.showUserDashboard();
-                        //var projects = dashboard.projects;
-                        //console.log(projects);
+                    .then(function (loggedInUser) {                        
                         $location.path('/dashboard');
                     });
             };
@@ -29,7 +25,7 @@ angular.module('issueTrackingSystem.home', ['ngRoute'])
             $scope.register = function (user) {
                 authentication.registerUser(user)
                     .then(function (registeredUser) {
-                        console.log(registeredUser);
+                        $location.path('/dashboard');
                     });
             };
         }]);
