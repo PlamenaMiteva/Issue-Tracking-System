@@ -17,7 +17,8 @@ angular.module('issueTrackingSystem.add-issue', [
         'issue',
         'project',
         'usersService',
-        function ($scope, $location, $routeParams, authentication, issue, project, usersService) {
+        'label',
+        function ($scope, $location, $routeParams, authentication, issue, project, usersService, label) {
             $scope.isLead = false;            
 
             project.getProjectById($routeParams.id)
@@ -34,6 +35,11 @@ angular.module('issueTrackingSystem.add-issue', [
                         .then(function (response) {
                             $scope.users = response.data;
                         });
+
+                    label.getLabels()
+                       .then(function (response) {
+                           $scope.users = response.data;
+                       });
                 });
 
             $scope.addLabel = function addLabel(labels, newLabelName) {
