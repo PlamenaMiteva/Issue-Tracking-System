@@ -26,13 +26,10 @@ angular.module('issueTrackingSystem.edit-project', [
                         });
                 });
 
-            project.getProjectIssues($routeParams.id)
-                .then(function (issues) {
-                    $scope.issues = issues.data;                   
-                });
-
-            $scope.editProject = function editProject (id, input, labels) {
+            $scope.editProject = function editProject(id, input, labels, priorities) {
                 input.Labels = labels;
+                input.Priorities = priorities;
+                console.log(priorities);
                 project.editProject(id, input)
                     .then(function (result) {
                         $location.path('/projects/' + id);

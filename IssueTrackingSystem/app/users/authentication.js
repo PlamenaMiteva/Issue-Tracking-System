@@ -4,7 +4,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
             '$q',
             'BASE_URL',
             function ($http, $q, BASE_URL) {
-                var token = "";
+                var data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
 
                 function registerUser(user) {
                     var deferred = $q.defer();
@@ -45,15 +45,28 @@ angular.module('issueTrackingSystem.users.authentication', [])
 
                 }
 
-                function isLoggedIn() {
-                   return sessionStorage['currentUser'] != undefined;
+                function getCurrentUser() {
+                    var deferred = $q.defer();
+
+                    $http.get(BASE_URL + 'users/me', { headers: { 'Authorization': data } })
+                        .then(function (response) {
+                            deferred.resolve(response.data);                            
+                        }, function (error) {
+
+                        });
+
+                    return deferred.promise;
                 }
 
-                return {
-                    token: token,
+                function isLoggedIn() {
+                   return sessionStorage['currentUser'] != undefined;
+                }               
+
+                return {                    
                     registerUser: registerUser,
                     loginUser: loginUser,
                     logout: logout,
+                    getCurrentUser: getCurrentUser,
                     isLoggedIn: isLoggedIn
                 }
             }]);

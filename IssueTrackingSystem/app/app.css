@@ -58,13 +58,13 @@ a, a:hover, a:active{
   border-color: #15a589;  
 }
 
-#project-panel, #issue-panel, #status-panel{
+#project-panel, #issue-panel, #status-panel, #add-issue-panel{
     background-color:#15a589;
 }
 
 .list-group {line-height:30px}
 
-#login-btn, #register-btn{
+#login-btn, #register-btn, #add-issue-btn{
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;

@@ -22,12 +22,18 @@
                         </option>
                     </select>
                     <br />
-                    <label for="project-priority">Priority</label>
+                    <label for="project-priority">Project Priorities</label>
+                    <div id="project-priority" ng-repeat="priority in project.Priorities">
+                        <input type="text" ng-model="priority.Name" class="form-control" placeholder={{priority.Name}} />
+                        <br>
+                    </div>
+
+                    <!--<label for="project-priority">Priority</label>
                     <select class="form-control" id="project-priority" name="project-priority" ng-model="newProject.PriorityId" required>
                         <option ng-repeat="priority in project.Priorities" value="{{priority.Id}}">
                             {{priority.Name}}
                         </option>
-                    </select>
+                    </select>-->
                     <br />
                     <div ng-if="project.Labels.length > 0">
                         <label for="labels">Labels</label>
@@ -37,7 +43,7 @@
                         </div>
                     </div>
                     <br>
-                    <button class="btn btn-primary" id="edit-project-btn" ng-disabled="editProjectForm.$invalid" ng-click="editProject(project.Id, newProject, project.Labels)">EDIT</button>
+                    <button class="btn btn-primary" id="edit-project-btn" ng-disabled="editProjectForm.$invalid" ng-click="editProject(project.Id, newProject, project.Labels, project.Priorities)">EDIT</button>
                 </form>
             </div>
         </div>

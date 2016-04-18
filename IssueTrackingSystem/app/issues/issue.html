@@ -22,7 +22,7 @@
                             <b>PriorityId: </b>{{issue.Priority.Id}}
                         </li>
                         <li class="list-group-item">
-                            <b>Due Date: </b>{{issue.DueDate}}
+                            <b>Due Date: </b>{{issue.DueDate | date:'yyyy-MM-dd'}}
                         </li>
                         <li class="list-group-item">
                         <b>Author: </b>{{issue.Author.Username}}
