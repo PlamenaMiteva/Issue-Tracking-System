@@ -4,23 +4,22 @@ angular.module('issueTrackingSystem.label', [])
             '$q',            
             'BASE_URL',            
             function ($http, $q, BASE_URL) {
+                var data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
                 
                 function getLabels(filter) {
-                    var deferred = $q.defer();
-                
-                    $http.get(BASE_URL + 'Labels/?filter=' + filter)
-                            .then(function(result) {
-                                deferred.resolve(result);                                
-                            });                   
-
-                    return deferred.promise;
+                    return $http.get(BASE_URL + 'Labels/?filter=' + filter, { headers: { 'Authorization': data } })
+                    .then(function (response) {
+                        return response.data.map(function (item) {
+                            return { name: item.Name };
+                        });
+                    });
                 }
 
-                
                 return {
-                    getLabels: getLabels                    
+                    getLabels : getLabels
                 }
-            }]);
+                
+           }]);
 
 
 

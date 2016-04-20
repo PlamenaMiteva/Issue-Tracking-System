@@ -1,3 +1,4 @@
+<script src="labels/autocomplete.js"></script>
 <div class="row" ng-controller='AddIssueCtrl'>
     <div class="jumbotron">
         <h1 id="add-issue-details">Add Issue To Project</h1>
@@ -36,10 +37,9 @@
                                 <b>Project Labels: </b><span ng-repeat="label in project.Labels">{{label.Name}}{{$last ? '' : ', '}}</span>
                             </div> 
                             <br/>
-                            <label for="issue-label">Labels</label>
-                            <input type="text" name="issue-label" id="issue-label" required="required" ng-model="newLabelName" class="form-control" />
-                            <br/>
-                            <button class="btn btn-primary" id="add-label-btn" ng-click="addLabel(project.Labels, newLabelName)">Add Label</button>
+                            <label for="issue-label">Labels</label>                           
+                            <input type="text" ng-model="asyncSelected" uib-typeahead="label as label.name for label in getAllLabels($viewValue)" class="form-control"> 
+                            <button class="btn btn-primary" id="add-label-btn" ng-click="addLabel(project.Labels, asyncSelected.name)">Add Label</button>
                             <br />              
                             <button class="btn btn-primary" id="add-issue-btn" ng-disabled="addIssueForm.$invalid" ng-click="addIssue(project.Id, newIssue)">ADD ISSUE</button>
                         </form>

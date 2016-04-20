@@ -33,7 +33,6 @@
   "dependencies": {
     "angular-ui-notification": "^0.2.0",
     "bootstrap": "^3.3.6",
-    "jQuery": "^1.7.4",
-    "jquery": "^2.2.3"
+    "jQuery": "^1.7.4"    
   }
 }

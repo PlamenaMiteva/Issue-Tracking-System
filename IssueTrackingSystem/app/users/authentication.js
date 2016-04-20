@@ -4,7 +4,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
             '$q',
             'BASE_URL',
             function ($http, $q, BASE_URL) {
-                var data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
+                //var data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
 
                 function registerUser(user) {
                     var deferred = $q.defer();

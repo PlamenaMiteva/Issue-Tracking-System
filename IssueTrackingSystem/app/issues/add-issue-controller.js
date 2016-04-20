@@ -11,6 +11,7 @@ angular.module('issueTrackingSystem.add-issue', [
     }])
     .controller('AddIssueCtrl', [
         '$scope',
+        '$http',
         '$location',
         '$routeParams',
         'authentication',
@@ -18,12 +19,13 @@ angular.module('issueTrackingSystem.add-issue', [
         'project',
         'usersService',
         'label',
-        function ($scope, $location, $routeParams, authentication, issue, project, usersService, label) {
-            $scope.isLead = false;            
-
+        'BASE_URL',
+        function ($scope, $http, $location, $routeParams, authentication, issue, project, usersService, label, BASE_URL) {
+            $scope.isLead = false;
+            
             project.getProjectById($routeParams.id)
                 .then(function (project) {
-                    $scope.project = project.data;
+                    $scope.project = project.data;                    
                     
                     authentication.getCurrentUser().then(function (response) {                                              
                         if (response.Username == project.data.Lead.Username) {
@@ -35,20 +37,22 @@ angular.module('issueTrackingSystem.add-issue', [
                         .then(function (response) {
                             $scope.users = response.data;
                         });
-
-                    label.getLabels()
-                       .then(function (response) {
-                           $scope.users = response.data;
-                       });
+                    
                 });
+            
+
+            $scope.getAllLabels = function (val) {
+                var data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
+                return label.getLabels(val);
+            }
+                       
 
             $scope.addLabel = function addLabel(labels, newLabelName) {
                 var newLabel = {
                     "Name": newLabelName
                 };
 
-                labels.push(newLabel);               
-                console.log($scope.project.Labels);
+                labels.push(newLabel);
             }
 
             $scope.addIssue = function addIssue (projectId, input) {
