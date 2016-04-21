@@ -1,49 +1,58 @@
-<script src="labels/autocomplete.js"></script>
 <div class="row" ng-controller='AddIssueCtrl'>
     <div class="jumbotron">
         <h1 id="add-issue-details">Add Issue To Project</h1>
     </div>
-        <div class="col-sm-9 col-md-6 col-lg-8" ng-if="isLead">
-            <div class="panel panel-primary">
-                <div class="panel-heading" id="add-issue-panel">
-                    <h3 class="panel-title">Project Name: <b>{{project.Name}}</b></h3>
-                </div>
-                <div class="panel-body">
-                        <form name="addIssueForm">
-                            <label for="issue-title">Title</label>
-                            <input type="text" name = "issueTitle" id="issue-title" required="required" ng-model="newIssue.Title" class="form-control" />
-                            <br />
-                            <label for="issue-description">Description</label>
-                            <textarea name = "issueDescription" id="issue-description" required="required" ng-model="newIssue.Description" class="form-control" />
-                            <br />
-                            <label for="issue-date">Due Date</label>
-                            <input type="text" name="issueDueDate" id="issue-date" required="required" ng-model="newIssue.DueDate" class="form-control" />
-                            <br />
-                            <label for="issue-assignee">Assignee</label>
-                            <select class="form-control" id="issue-assignee" name="issue-assignee" ng-model="newIssue.AssigneeId" required>
-                            <option ng-repeat="user in users" value="{{user.Id}}">
-                                {{user.Username}}
-                            </option>
-                            </select>
-                            <br />
-                            <label for="priority">Priority</label>
-                            <select class="form-control" id="priority" name="priority" ng-model="newIssue.PriorityId" required>
-                                <option ng-repeat="priority in project.Priorities" value="{{priority.Id}}">
-                                    {{priority.Name}}
-                                </option>
-                            </select>
-                            <br /> 
-                            <div>
-                                <b>Project Labels: </b><span ng-repeat="label in project.Labels">{{label.Name}}{{$last ? '' : ', '}}</span>
-                            </div> 
-                            <br/>
-                            <label for="issue-label">Labels</label>                           
-                            <input type="text" ng-model="asyncSelected" uib-typeahead="label as label.name for label in getAllLabels($viewValue)" class="form-control"> 
-                            <button class="btn btn-primary" id="add-label-btn" ng-click="addLabel(project.Labels, asyncSelected.name)">Add Label</button>
-                            <br />              
-                            <button class="btn btn-primary" id="add-issue-btn" ng-disabled="addIssueForm.$invalid" ng-click="addIssue(project.Id, newIssue)">ADD ISSUE</button>
-                        </form>
-                </div>
+    <div class="col-sm-9 col-md-6 col-lg-8" ng-if="isLead">
+        <div class="panel panel-primary">
+            <div class="panel-heading" id="add-issue-panel">
+                <h3 class="panel-title">Project Name: <b>{{project.Name}}</b></h3>
+            </div>
+            <div class="panel-body">
+                <form name="addIssueForm">
+                    <label for="issue-title">Title</label>
+                    <input type="text" name="issueTitle" id="issue-title" required="required" ng-model="newIssue.Title" class="form-control" />
+                    <br />
+                    <label for="issue-description">Description</label>
+                    <textarea name="issueDescription" id="issue-description" required="required" ng-model="newIssue.Description" class="form-control" />
+                    <br />
+                    <label for="issue-assignee">Assignee</label>
+                    <select class="form-control" id="issue-assignee" name="issue-assignee" ng-model="newIssue.AssigneeId" required>
+                        <option ng-repeat="user in users" value="{{user.Id}}">
+                            {{user.Username}}
+                        </option>
+                    </select>
+                    <br />
+                    <label for="priority">Priority</label>
+                    <select class="form-control" id="priority" name="priority" ng-model="newIssue.PriorityId" required>
+                        <option ng-repeat="priority in project.Priorities" value="{{priority.Id}}">
+                            {{priority.Name}}
+                        </option>
+                    </select>
+                    <br />
+                    <label for="issue-date">Due Date</label>
+                    <pre><b>Selected Project Deadline is: </b><em>{{dt | date:'fullDate' }}</em></pre>
+                    <div>
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" ng-change="setDueDate(dt)" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <br />
+                    <div>
+                        <pre><b>Project Labels: </b><em><span ng-repeat="label in project.Labels">{{label.Name}}{{$last ? '' : ', '}}</span></em></pre>
+                    </div>
+                    <br />
+                    <label for="issue-label">Labels</label>
+                    <input type="text" ng-model="asyncSelected" uib-typeahead="label as label.name for label in getAllLabels($viewValue)" class="form-control">
+                    <button class="btn btn-primary" id="add-label-btn" ng-click="addLabel(project.Labels, asyncSelected.name)">Add Label</button>
+                    <br />
+                    <button class="btn btn-primary" id="add-issue-btn" ng-disabled="addIssueForm.$invalid" ng-click="addIssue(project.Id, newIssue)">ADD ISSUE</button>
+                </form>
             </div>
         </div>
+    </div>
 </div>
+
+
