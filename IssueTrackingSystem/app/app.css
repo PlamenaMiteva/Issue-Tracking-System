@@ -94,11 +94,30 @@ thead{
     font-weight: bold;    
 }
 
-#page-button{
+#page-button, #project-page-button{
     margin-left: 5px;
 }
 
 #dashboard-pagination{
     margin-top: 40px;
+}
+
+#projects-jumbotron, #issues-jumbotron{
+    padding: 0.5em 0.6em;
+    font-size: 3em;
+    color: #15a589;
+}
+
+.table-striped{
+    border-style:solid;
+    border-width: 1px;
+    border-color: gray;   
+}
+
+#my-projects, #my-issues{
+    border-style:groove;
+    border-color: gray;
+    padding-bottom : 10px;
+    padding-top: 10px;
 }
 

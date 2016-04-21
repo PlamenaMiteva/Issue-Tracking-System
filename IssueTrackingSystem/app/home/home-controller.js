@@ -14,18 +14,19 @@ angular.module('issueTrackingSystem.home', ['ngRoute'])
         'authentication',
         'dashboard',
         function ($scope, $location, authentication, dashboard) {
-
+            $scope.auth = false;            
+            
             $scope.login = function (user) {
                 authentication.loginUser(user)
-                    .then(function (loggedInUser) {                        
-                        $location.path('/dashboard');
+                    .then(function (loggedInUser) {
+                        $scope.auth = true;                        
                     });
             };
 
             $scope.register = function (user) {
                 authentication.registerUser(user)
                     .then(function (registeredUser) {
-                        $location.path('/dashboard');
+                        $scope.auth = true;                        
                     });
-            };
+            };            
         }]);

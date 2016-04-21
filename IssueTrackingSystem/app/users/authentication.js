@@ -3,11 +3,10 @@ angular.module('issueTrackingSystem.users.authentication', [])
             '$http',
             '$q',
             'BASE_URL',
-            function ($http, $q, BASE_URL) {
-                //var data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
+            function ($http, $q, BASE_URL) {                
 
                 function registerUser(user) {
-                    var deferred = $q.defer();
+                    var deferred = $q.defer();                    
 
                     $http.post(BASE_URL + 'api/Account/Register', user)
                         .then(function (response) {
@@ -27,12 +26,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
                         var response = $http.post(BASE_URL + 'api/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })                   
                         .then(function (response) {
                             token = response.data['access_token'];
-                            sessionStorage['currentUser'] = JSON.stringify(response.data);
-                            //data = "Bearer " + accessToken;
-                            //$http.get(BASE_URL + 'projects', { headers: { 'Authorization': data } }).then(function (response) {
-                            //    var projects = response.data;
-                            //    $scope.projects= projects;
-                            //});                            
+                            sessionStorage['currentUser'] = JSON.stringify(response.data);                                            
                             deferred.resolve(response.data);
                         }, function (error) {
 
@@ -47,6 +41,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
 
                 function getCurrentUser() {
                     var deferred = $q.defer();
+                    var data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
 
                     $http.get(BASE_URL + 'users/me', { headers: { 'Authorization': data } })
                         .then(function (response) {
@@ -58,9 +53,9 @@ angular.module('issueTrackingSystem.users.authentication', [])
                     return deferred.promise;
                 }
 
-                function isLoggedIn() {
-                   return sessionStorage['currentUser'] != undefined;
-                }               
+                var isLoggedIn = (function () {
+                    return sessionStorage['currentUser'] != undefined;
+                })();
 
                 return {                    
                     registerUser: registerUser,
