@@ -33,6 +33,8 @@
             <div class="collapse navbar-collapse" id="home-navbar-2">
                 <ul class="nav navbar-nav" id="home-navbar-ul">
                     <li id="home-li"><a href="#/">Home</a></li>
+                    <li id="logout-li" ng-show="auth==true"><a href="#/logout">Logout</a></li>
+                    <li id="change-password-li" ng-show="auth==true"><a href="#/profile/password">Change Password</a></li>
                 </ul>
             </div>
         </div>

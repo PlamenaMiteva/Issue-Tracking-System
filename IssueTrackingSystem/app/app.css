@@ -35,7 +35,7 @@
   border-color: #15a589;  
 }
 
-#navbar-logo, #home-li a{
+#navbar-logo, #home-li a, #logout-li a, #change-password-li a{
     color: white;
 }
 

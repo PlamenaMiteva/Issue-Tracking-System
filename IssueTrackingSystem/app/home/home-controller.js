@@ -9,23 +9,24 @@ angular.module('issueTrackingSystem.home', ['ngRoute'])
         });
     }])
     .controller('HomeCtrl', [
+        '$rootScope',
         '$scope',
         '$location',
         'authentication',       
-        function ($scope, $location, authentication) {
-            $scope.auth = false;            
+        function ($rootScope, $scope, $location, authentication) {
+            $rootScope.auth = false;
             
             $scope.login = function (user) {
                 authentication.loginUser(user)
                     .then(function (loggedInUser) {
-                        $scope.auth = true;                        
+                        $rootScope.auth = true;
                     });
             };
 
             $scope.register = function (user) {
                 authentication.registerUser(user)
                     .then(function (registeredUser) {
-                        $scope.auth = true;                        
+                        $rootScope.auth = true;
                     });
             };            
         }]);
