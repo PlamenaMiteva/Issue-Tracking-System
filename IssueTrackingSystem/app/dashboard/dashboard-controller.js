@@ -1,14 +1,8 @@
 'use strict';
 
-angular.module('issueTrackingSystem.users.board', [
-        'issueTrackingSystem.users.dashboard'
-])
-    .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/dashboard', {
-            templateUrl: 'users/dashboard.html',
-            controller: 'BoardCtrl'
-        });
-    }])
+angular.module('issueTrackingSystem.board', [
+        'issueTrackingSystem.dashboard'
+])    
     .controller('BoardCtrl', [
         '$scope',
         '$location',

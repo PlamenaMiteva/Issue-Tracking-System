@@ -1,4 +1,4 @@
-angular.module('issueTrackingSystem.users.dashboard', [])
+angular.module('issueTrackingSystem.dashboard', [])
         .factory('dashboard', [
             '$http',
             '$q',

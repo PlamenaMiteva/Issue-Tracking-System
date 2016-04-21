@@ -1,0 +1,61 @@
+    <div ng-controller="BoardCtrl">
+    <div class="jumbotron" style="height: 100%">
+        <h1 id="system-dashboard">System Dashboard</h1>
+    </div>
+    <div class="col-md-4" id="my-projects">
+        <div class="jumbotron" id="projects-jumbotron">
+            <h4 id="projects-dashboard">My Projects</h4>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Project</td>
+                    <td>Description</td>
+                </tr>
+            </thead>
+            <tbody ng-repeat="project in projects">
+                <tr>
+                    <td><a ng-href="#/projects/{{project.Id}}">{{project.Name}}</a></td>
+                    <td>{{project.Description}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center" id="dashboard-pagination">
+            <ul class="pagination-lg">
+                <li class="btn btn-primary" ng-click='projectPreviousPage()'>Previous</li>
+                <li class="btn btn-primary" id="project-page-button" ng-model="projectPage" ng-repeat="projectPage in projectPageArray" ng-click='getCurrentProjectPage(projectPage)'>{{projectPage}}</li>
+                <li class="btn btn-primary" ng-click='projectNextPage()'>Next</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-7 col-md-offset-1" id="my-issues">
+        <div class="jumbotron" id="issues-jumbotron">
+            <h4 id="assigned-to-me-dashboard">Assigned to Me</h4>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Issue</td>
+                    <td>Description</td>
+                    <td>Project</td>
+                    <td>Due Date</td>
+                </tr>
+            </thead>
+            <tbody ng-repeat="issue in issues" ng-controller='BoardCtrl'>
+                <tr>
+                    <td><a ng-href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
+                    <td>{{issue.Description}}</td>
+                    <td><a ng-href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a></td>
+                    <td>{{issue.DueDate| date:'dd/MM/yyyy'}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center" id="dashboard-pagination">
+            <ul class="pagination-lg">
+                <li class="btn btn-primary" ng-click='previousPage()'>Previous</li>
+                <li class="btn btn-primary" id="page-button" ng-model="page" ng-repeat="page in pageArray" ng-click='getCurrentPage(page)'>{{page}}</li>
+                <li class="btn btn-primary" ng-click='nextPage()'>Next</li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -11,9 +11,8 @@ angular.module('issueTrackingSystem.home', ['ngRoute'])
     .controller('HomeCtrl', [
         '$scope',
         '$location',
-        'authentication',
-        'dashboard',
-        function ($scope, $location, authentication, dashboard) {
+        'authentication',       
+        function ($scope, $location, authentication) {
             $scope.auth = false;            
             
             $scope.login = function (user) {
