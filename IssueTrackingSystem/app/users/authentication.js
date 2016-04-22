@@ -36,7 +36,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 }
 
                 function logout() {
-
+                    sessionStorage.clear;
                 }
 
                 function getCurrentUser() {

@@ -6,7 +6,7 @@
         <div class="jumbotron" id="projects-jumbotron">
             <h4 id="projects-dashboard">My Projects</h4>
         </div>
-        <table class="table table-striped">
+        <table class="table table-striped" ng-if="projects.length>0">
             <thead>
                 <tr>
                     <td>Project</td>
@@ -20,19 +20,20 @@
                 </tr>
             </tbody>
         </table>
-        <div class="text-center" id="dashboard-pagination">
+        <div class="text-center" id="dashboard-pagination" ng-if="projects.length>0">
             <ul class="pagination-lg">
                 <li class="btn btn-primary" ng-click='projectPreviousPage()'>Previous</li>
                 <li class="btn btn-primary" id="project-page-button" ng-model="projectPage" ng-repeat="projectPage in projectPageArray" ng-click='getCurrentProjectPage(projectPage)'>{{projectPage}}</li>
                 <li class="btn btn-primary" ng-click='projectNextPage()'>Next</li>
             </ul>
         </div>
-    </div>
+        <p class="text-center" ng-if="projects.length==0">Currently you do not have any projects</p>
+        </div>
     <div class="col-md-7 col-md-offset-1" id="my-issues">
         <div class="jumbotron" id="issues-jumbotron">
             <h4 id="assigned-to-me-dashboard">Assigned to Me</h4>
         </div>
-        <table class="table table-striped">
+        <table class="table table-striped" ng-if="issues.length > 0">
             <thead>
                 <tr>
                     <td>Issue</td>
@@ -50,12 +51,13 @@
                 </tr>
             </tbody>
         </table>
-        <div class="text-center" id="dashboard-pagination">
+        <div class="text-center" id="dashboard-pagination" ng-if="issues.length > 0">
             <ul class="pagination-lg">
                 <li class="btn btn-primary" ng-click='previousPage()'>Previous</li>
                 <li class="btn btn-primary" id="page-button" ng-model="page" ng-repeat="page in pageArray" ng-click='getCurrentPage(page)'>{{page}}</li>
                 <li class="btn btn-primary" ng-click='nextPage()'>Next</li>
             </ul>
         </div>
+        <p class="text-center" ng-if="issues.length==0">Currently there are not any issues assigned to you</p>
     </div>
 </div>
