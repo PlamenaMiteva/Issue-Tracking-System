@@ -5,6 +5,7 @@ angular.module('issueTrackingSystem.common.modal', ['ui.bootstrap'])
         '$scope',
         '$uibModalInstance',
     function ($scope, $uibModalInstance) { 
+        $scope.message = $scope.message;
         $scope.ok = function () {
             $uibModalInstance.close();
         };

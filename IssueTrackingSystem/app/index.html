@@ -33,7 +33,7 @@
             <div class="collapse navbar-collapse" id="home-navbar-2">
                 <ul class="nav navbar-nav" id="home-navbar-ul">
                     <li id="home-li"><a href="#/">Home</a></li>
-                    <li id="logout-li" ng-show="auth==true"><a ng-controller="LogoutCtrl" ng-click="logout()">Logout</a></li>
+                    <li id="logout-li" ng-show="auth==true"><a ng-controller="HomeCtrl" ng-click="logout()">Logout</a></li>
                     <li id="change-password-li" ng-show="auth==true"><a href="#/profile/password">Change Password</a></li>
                 </ul>
             </div>
@@ -43,7 +43,7 @@
     <div ng-controller="HomeCtrl">
         <script type="text/ng-template" id="login-notification.html">
             <div class="modal-body">
-                <p>You have been successfully logged in</p>
+                <p>{{message}}</p>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" type="button" ng-click=" ok()">OK</button>
@@ -51,29 +51,7 @@
             </div>
         </script>
     </div>
-    <div ng-controller="HomeCtrl">
-        <script type="text/ng-template" id="register-notification.html">
-            <div class="modal-body">
-                <p>You have been successfully registered in the Issue Traching System</p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click=" ok()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-            </div>
-        </script>
-    </div>
-    <div ng-controller="LogoutCtrl">
-        <script type="text/ng-template" id="logout-notification.html">
-            <div class="modal-body">
-                <p>You have been successfully logged out</p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click=" ok()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-            </div>
-        </script>
-    </div>
-        <div class="container-fluid">
+            <div class="container-fluid">
             <div ng-view></div>
         </div>
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -90,7 +68,6 @@
         <script src="common/modal.js"></script>
         <script src="users/authentication.js"></script>
         <script src="users/user-service.js"></script>
-        <script src="users/logout-controller.js"></script>
         <script src="projects/project-controller.js"></script>
         <script src="projects/edit-project-controller.js"></script>
         <script src="projects/project.js"></script>

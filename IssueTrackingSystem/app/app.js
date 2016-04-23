@@ -7,7 +7,6 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.home',
         'issueTrackingSystem.dashboard',
         'issueTrackingSystem.board',
-        'issueTrackingSystem.users.logout',
         'issueTrackingSystem.users.authentication',
         'issueTrackingSystem.users.usersService',
         'issueTrackingSystem.projects',
