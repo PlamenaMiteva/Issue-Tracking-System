@@ -23,9 +23,8 @@ angular.module('issueTrackingSystem.profile', [
             $scope.changePassword = function (user) {
                 usersService.changePassword(user)
                     .then(function () {
-                        console.log("done")
                         var modalInstance = $uibModal.open({
-                            templateUrl: 'change-password-notification.html',
+                            templateUrl: 'notification.html',
                             scope: function() {
                                 var scope = $rootScope.$new();
                                 scope.message = 'Your password has been successfully changed';

@@ -21,7 +21,7 @@ angular.module('issueTrackingSystem.home', ['ngRoute', 'ui.bootstrap', 'issueTra
                 authentication.loginUser(user)
                     .then(function (loggedInUser) {                        
                         var modalInstance = $uibModal.open({
-                            templateUrl: 'login-notification.html',
+                            templateUrl: 'notification.html',
                             scope: function() {
                                 var scope = $rootScope.$new();
                                 scope.message = 'You have been successfully logged in';
@@ -39,7 +39,7 @@ angular.module('issueTrackingSystem.home', ['ngRoute', 'ui.bootstrap', 'issueTra
                 authentication.registerUser(user)
                     .then(function (registeredUser) {
                         var modalInstance = $uibModal.open({
-                            templateUrl: 'login-notification.html',
+                            templateUrl: 'notification.html',
                             scope: function() {
                                 var scope = $rootScope.$new();
                                 scope.message = 'You have been successfully registered to the Issue Tracking System';
@@ -55,7 +55,7 @@ angular.module('issueTrackingSystem.home', ['ngRoute', 'ui.bootstrap', 'issueTra
                 authentication.logout();
 
                 var modalInstance = $uibModal.open({
-                    templateUrl: 'login-notification.html',
+                    templateUrl: 'notification.html',
                     scope: function() {
                         var scope = $rootScope.$new();
                         scope.message = 'You have been successfully logged out';

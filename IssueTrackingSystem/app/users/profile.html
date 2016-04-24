@@ -12,10 +12,10 @@
                     </div>
                     <br />
                     <label for="newPassword">New Password</label>
-                    <input type="password" name="newPassword" required="required" ng-model="user.newPassword" id="newPassword" class="form-control" />
+                    <input type="password" name="newPassword" required="required" ng-minlength="6" ng-maxlength="100" ng-model="user.newPassword" id="newPassword" class="form-control" />
                     <div class="error-message"
                          ng-show="userProfileForm.newPassword.$invalid && !userProfileForm.newPassword.$pristine">
-                        Please enter your new password.
+                         Password must be between 6 and 100 characters.
                     </div>
                     <br />
                     <label for="confirm-password">Confirm Password</label>
@@ -30,14 +30,4 @@
             </fieldset>
         </div>
     </div>
-</div>
-<div ng-controller="ProfileCtrl">
-    <script type="text/ng-template" id="change-password-notification.html">
-        <div class="modal-body">
-            <div class="text-center">{{message}}</div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click=" ok()">OK</button>
-        </div>
-    </script>
 </div>

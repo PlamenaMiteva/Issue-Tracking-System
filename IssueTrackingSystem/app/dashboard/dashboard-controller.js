@@ -14,7 +14,6 @@ angular.module('issueTrackingSystem.board', [
             if (!authentication.isAuthenticated()) {
                 $location.path('/');
             }
-console.log(authentication.isAuthenticated());
             $scope.pageNumber= 1;
             $scope.pageSize = 10;
             $scope.pageArray = [];
@@ -24,27 +23,43 @@ console.log(authentication.isAuthenticated());
             $scope.start = 0;
             $scope.end = 10;
 
-            dashboard.getAllProjects()
-               .then(function (projects) {
-                   $scope.myProjects = projects.data.filter(function (x) {
-                       var currentUser = identity.requestUserProfile();
-                       return x.Lead.Id === currentUser.Id;
-                   });
-                   $scope.projects = $scope.myProjects.slice($scope.start, $scope.end);                   
-                   $scope.projectsPages = Math.ceil($scope.myProjects.length / 10);
-                   for (var i = 1; i <= $scope.projectsPages; i++) {
-                       $scope.projectPageArray.push(i);
-                   }                   
-               });
+            identity.getCurrentUser()
+                .then(function (user) {
+                    $scope.currentUserId = user.Id;
+                });
            
             dashboard.showUserDashboard($scope.pageSize, $scope.pageNumber)
                .then(function (issues) {
+                   $scope.totalPages = issues.data.TotalPages;
                    $scope.issues = issues.data.Issues;
                    $scope.pages = issues.data.TotalPages;
                    for (var i = 1; i <= $scope.pages; i++) {
                        $scope.pageArray.push(i);
                    }                   
                });
+
+            dashboard.getAllProjects()
+                .then(function (projects) {
+                    $scope.myProjects = projects.data.filter(function (x) {
+                        return x.Lead.Id == $scope.currentUserId;
+                    });
+
+                    dashboard.showUserDashboard($scope.totalPages*10, 1)
+                        .then(function (result) {
+                            $scope.allIssues = result.data.Issues;
+                            $scope.allIssues.forEach(function(i){
+                                if ($scope.myProjects.indexOf(i.Project) == -1) {
+                                    $scope.myProjects.push(i.Project);
+                                };
+                            });
+                        });
+
+                    $scope.projects = $scope.myProjects.slice($scope.start, $scope.end);
+                    $scope.projectsPages = Math.ceil($scope.myProjects.length / 10);
+                    for (var i = 1; i <= $scope.projectsPages; i++) {
+                        $scope.projectPageArray.push(i);
+                    }
+                });
 
             $scope.nextPage = function () {
                 if ($scope.pageNumber < $scope.pages) {

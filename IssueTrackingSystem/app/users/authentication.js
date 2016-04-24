@@ -17,7 +17,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 }
 
                 function registerUser(user) {
-                    var deferred = $q.defer();                    
+                    var deferred = $q.defer();
 
                     $http.post(BASE_URL + 'api/Account/Register', user)
                         .then(function (response) {
