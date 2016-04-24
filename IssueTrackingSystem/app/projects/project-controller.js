@@ -12,14 +12,16 @@ angular.module('issueTrackingSystem.projects', [
     .controller('ProjectCtrl', [
         '$scope',
         '$routeParams',
+        'identity',
         'project',
-        function ($scope, $routeParams, project) {
+        function ($scope, $routeParams, identity, project) {
             $scope.isLead = false;
 
             project.getProjectById($routeParams.id)
                 .then(function (project) {
                     $scope.project = project.data;
-                    if(JSON.parse(sessionStorage['currentUser']).userName=== project.data.Lead.Username){
+                    var currentUser = identity.requestUserProfile();
+                    if(currentUser.Id === project.data.Lead.Id){
                         $scope.isLead = true;
                     }
                 });

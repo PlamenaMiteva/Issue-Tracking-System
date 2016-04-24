@@ -15,7 +15,7 @@ angular.module('issueTrackingSystem.home', ['ngRoute', 'ui.bootstrap', 'issueTra
         '$uibModal',
         'authentication',       
         function ($rootScope, $scope, $location, $uibModal, authentication) {
-            $rootScope.auth = false;
+            $rootScope.auth = authentication.isAuthenticated();
 
             $scope.login = function (user) {                
                 authentication.loginUser(user)
@@ -28,9 +28,9 @@ angular.module('issueTrackingSystem.home', ['ngRoute', 'ui.bootstrap', 'issueTra
                                 return scope;
                             }(),
                             controller: "ModalInstanceCtrl" 
-                        });  
+                        });
 
-                        $rootScope.auth = true;
+                        $rootScope.auth = authentication.isAuthenticated();
                         
                     });
             };
@@ -47,7 +47,7 @@ angular.module('issueTrackingSystem.home', ['ngRoute', 'ui.bootstrap', 'issueTra
                             }(),
                             controller: "ModalInstanceCtrl"
                         });
-                        $rootScope.auth = true;
+                        $rootScope.auth = authentication.isAuthenticated();
                     });
             };
 
@@ -64,7 +64,7 @@ angular.module('issueTrackingSystem.home', ['ngRoute', 'ui.bootstrap', 'issueTra
                     controller: 'ModalInstanceCtrl'
                 });
 
-                $rootScope.auth = false;
+                $rootScope.auth = authentication.isAuthenticated();
                 $location.path('#/');
             };
         }]);

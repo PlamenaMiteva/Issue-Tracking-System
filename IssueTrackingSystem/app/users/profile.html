@@ -1,0 +1,43 @@
+<div class="margin-bottom-100" >
+    <div class="row">
+        <div class="col-md-8 " id="profile-form">
+            <fieldset>
+                <legend id="profile-legend">CHANGE PASSWORD</legend>
+                <form name="userProfileForm">
+                    <label for="oldPassword">Old Password</label>
+                    <input type="password" name="oldPassword" required="required" ng-model="user.oldPassword" id="oldPassword" class="form-control" />
+                    <div class="error-message"
+                         ng-show="userProfileForm.oldPassword.$invalid && !userProfileForm.oldPassword.$pristine">
+                        Please enter your old password.
+                    </div>
+                    <br />
+                    <label for="newPassword">New Password</label>
+                    <input type="password" name="newPassword" required="required" ng-model="user.newPassword" id="newPassword" class="form-control" />
+                    <div class="error-message"
+                         ng-show="userProfileForm.newPassword.$invalid && !userProfileForm.newPassword.$pristine">
+                        Please enter your new password.
+                    </div>
+                    <br />
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" name="confirmPassword" required="required" ng-pattern="user.newPassword" ng-model="user.confirmPassword" id="confirm-password" class="form-control" />
+                    <div class="error-message"
+                         ng-show="userProfileForm.confirmPassword.$invalid && !userProfileForm.confirmPassword.$pristine">
+                        Sorry, the passwords do not match.
+                    </div>
+                    <br />
+                    <button class="btn btn-primary" id="profile-btn" ng-disabled="userProfileForm.$invalid" ng-click="changePassword(user)">CONTINUE</button>
+                </form>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<div ng-controller="ProfileCtrl">
+    <script type="text/ng-template" id="change-password-notification.html">
+        <div class="modal-body">
+            <div class="text-center">{{message}}</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click=" ok()">OK</button>
+        </div>
+    </script>
+</div>

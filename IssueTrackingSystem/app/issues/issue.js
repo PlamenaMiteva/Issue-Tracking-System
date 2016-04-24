@@ -4,12 +4,11 @@ angular.module('issueTrackingSystem.issue', [])
             '$q',            
             'BASE_URL',            
             function ($http, $q, BASE_URL) {
-                var data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
 
                 function getIssueById(id) {
                     var deferred = $q.defer();
                 
-                    $http.get(BASE_URL + 'issues/' + id, { headers: { 'Authorization': data } })
+                    $http.get(BASE_URL + 'issues/' + id, { headers: { 'Authorization': $http.defaults.headers.common.Authorization } })
                             .then(function(result) {
                                 deferred.resolve(result);
                             });                   
@@ -20,7 +19,7 @@ angular.module('issueTrackingSystem.issue', [])
                 function changeStatus(issueId, statusId) {
                     var deferred = $q.defer();
 
-                    $http.put(BASE_URL + 'Issues/' + issueId + '/changestatus?statusid=' + statusId, statusId, { headers: { 'Authorization': data } })
+                    $http.put(BASE_URL + 'Issues/' + issueId + '/changestatus?statusid=' + statusId, statusId, { headers: { 'Authorization': $http.defaults.headers.common.Authorization  } })
                         .then(function(result) {
                             deferred.resolve(result);
                         });
@@ -31,7 +30,7 @@ angular.module('issueTrackingSystem.issue', [])
                 function editIssue(id, issueData) {
                     var deferred = $q.defer();
 
-                    $http.put(BASE_URL + 'Issues/' + id, issueData, { headers: { 'Authorization': data } })
+                    $http.put(BASE_URL + 'Issues/' + id, issueData, { headers: { 'Authorization': $http.defaults.headers.common.Authorization  } })
                         .then(function(result) {
                             deferred.resolve(result);
                         });
@@ -42,7 +41,7 @@ angular.module('issueTrackingSystem.issue', [])
                 function addIssue(projectId, issueData) {
                     var deferred = $q.defer();
 
-                    $http.post(BASE_URL + 'Issues/', issueData, { headers: { 'Authorization': data } })
+                    $http.post(BASE_URL + 'Issues/', issueData, { headers: { 'Authorization': $http.defaults.headers.common.Authorization  } })
                         .then(function (result) {
                             deferred.resolve(result);
                         });

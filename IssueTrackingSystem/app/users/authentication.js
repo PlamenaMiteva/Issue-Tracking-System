@@ -1,19 +1,32 @@
 angular.module('issueTrackingSystem.users.authentication', [])
         .factory('authentication', [
             '$http',
+            '$cookies',
             '$q',
+            '$location',
+            'identity',
             'BASE_URL',
-            function ($http, $q, BASE_URL) {                
+            function ($http, $cookies, $q, $location, identity, BASE_URL) {
+
+                var AUTHENTICATION_COOKIE_KEY = '!__Authentication_Cookie_Key__!';
+
+                function preserveUserData(data) {
+                    var accessToken = data.access_token;
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
+                    $cookies.put(AUTHENTICATION_COOKIE_KEY, accessToken);
+                }
 
                 function registerUser(user) {
                     var deferred = $q.defer();                    
 
                     $http.post(BASE_URL + 'api/Account/Register', user)
                         .then(function (response) {
-                            deferred.resolve(response.data);
-                            sessionStorage['currentUser'] = JSON.stringify(response.data);
-                        }, function (error) {
+                            preserveUserData(response.data);
 
+                            identity.requestUserProfile()
+                                .then(function() {
+                                    deferred.resolve(response.data);
+                                });
                         });
 
                     return deferred.promise;
@@ -25,43 +38,39 @@ angular.module('issueTrackingSystem.users.authentication', [])
                     
                         var response = $http.post(BASE_URL + 'api/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })                   
                         .then(function (response) {
-                            token = response.data['access_token'];
-                            sessionStorage['currentUser'] = JSON.stringify(response.data);                                            
-                            deferred.resolve(response.data);
-                        }, function (error) {
+                            preserveUserData(response.data);
 
+                            identity.requestUserProfile()
+                                .then(function() {
+                                    deferred.resolve(response.data);
+                                });
                         });
 
                     return deferred.promise;
                 }
 
                 function logout() {
-                    sessionStorage.clear;
+                    $cookies.remove(AUTHENTICATION_COOKIE_KEY);
+                    $http.defaults.headers.common.Authorization = undefined;
+                    identity.removeUserProfile();
                 }
 
-                function getCurrentUser() {
-                    var deferred = $q.defer();
-                    var data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
-
-                    $http.get(BASE_URL + 'users/me', { headers: { 'Authorization': data } })
-                        .then(function (response) {
-                            deferred.resolve(response.data);                            
-                        }, function (error) {
-
-                        });
-
-                    return deferred.promise;
+                function isAuthenticated() {
+                    return !!$cookies.get(AUTHENTICATION_COOKIE_KEY);
                 }
 
-                var isLoggedIn = (function () {
-                    return sessionStorage['currentUser'] != undefined;
-                })();
+                function refreshCookie() {
+                    if (isAuthenticated()) {
+                        $http.defaults.headers.common.Authorization = 'Bearer ' + $cookies.get(AUTHENTICATION_COOKIE_KEY);
+                        identity.requestUserProfile();
+                    }
+                }
 
                 return {                    
                     registerUser: registerUser,
                     loginUser: loginUser,
                     logout: logout,
-                    getCurrentUser: getCurrentUser,
-                    isLoggedIn: isLoggedIn
+                    refreshCookie: refreshCookie,
+                    isAuthenticated: isAuthenticated
                 }
             }]);

@@ -15,8 +15,9 @@ angular.module('issueTrackingSystem.edit-issue', [
         '$routeParams',
         'issue',
         'project',
+        'identity',
         'usersService',
-        function ($scope, $location, $routeParams, issue, project, usersService) {
+        function ($scope, $location, $routeParams, issue, project, identity, usersService) {
             issue.getIssueById($routeParams.id)
                 .then(function (issue) {
                     $scope.issue = issue.data;                    
@@ -33,10 +34,11 @@ angular.module('issueTrackingSystem.edit-issue', [
                             $scope.avilablePriorities = response.data.Priorities;                          
                         });
 
-                    if(JSON.parse(sessionStorage['currentUser']).userName=== issue.data.Author.Username){
+                    var currentUser = identity.requestUserProfile();
+                    if(currentUser.Id=== issue.data.Author.id){
                         $scope.isLead = true;
                     }
-                    if(JSON.parse(sessionStorage['currentUser']).userName=== issue.data.Assignee.Username){
+                    if(currentUser.Id=== issue.data.Assignee.Id){
                         $scope.isAssignee = true;
                     }
                 });

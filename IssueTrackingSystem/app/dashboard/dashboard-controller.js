@@ -7,13 +7,14 @@ angular.module('issueTrackingSystem.board', [
         '$scope',
         '$location',
         'authentication',
+        'identity',
         'dashboard',
-        function ($scope, $location, authentication, dashboard) {            
+        function ($scope, $location, authentication, identity, dashboard) {
 
-            if (!authentication.isLoggedIn) {
+            if (!authentication.isAuthenticated()) {
                 $location.path('/');
             }
-
+console.log(authentication.isAuthenticated());
             $scope.pageNumber= 1;
             $scope.pageSize = 10;
             $scope.pageArray = [];
@@ -26,7 +27,8 @@ angular.module('issueTrackingSystem.board', [
             dashboard.getAllProjects()
                .then(function (projects) {
                    $scope.myProjects = projects.data.filter(function (x) {
-                       return x.Lead.Username === JSON.parse(sessionStorage['currentUser']).userName;
+                       var currentUser = identity.requestUserProfile();
+                       return x.Lead.Id === currentUser.Id;
                    });
                    $scope.projects = $scope.myProjects.slice($scope.start, $scope.end);                   
                    $scope.projectsPages = Math.ceil($scope.myProjects.length / 10);

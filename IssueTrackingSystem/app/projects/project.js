@@ -3,13 +3,12 @@ angular.module('issueTrackingSystem.project', [])
             '$http',
             '$q',            
             'BASE_URL',            
-            function ($http, $q, BASE_URL) {
-                data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
+            function ($http, $q, BASE_URL) {                
 
                 function getProjectById(id) {
                     var deferred = $q.defer();
                 
-                    $http.get(BASE_URL + 'Projects/' + id, { headers: { 'Authorization': data } })
+                    $http.get(BASE_URL + 'Projects/' + id, { headers: { 'Authorization': $http.defaults.headers.common.Authorization } })
                             .then(function(result) {
                                 deferred.resolve(result);                                
                             });                   
@@ -20,7 +19,7 @@ angular.module('issueTrackingSystem.project', [])
                 function getProjectIssues(id) {
                     var deferred = $q.defer();
 
-                    $http.get(BASE_URL + 'Projects/' + id + '/Issues', { headers: { 'Authorization': data } })
+                    $http.get(BASE_URL + 'Projects/' + id + '/Issues', { headers: { 'Authorization': $http.defaults.headers.common.Authorization  } })
                             .then(function (result) {
                                 deferred.resolve(result);
                             });
@@ -31,10 +30,9 @@ angular.module('issueTrackingSystem.project', [])
                 function editProject(id, projectData) {
                     var deferred = $q.defer();
 
-                    $http.put(BASE_URL + 'projects/' + id, projectData, { headers: { 'Authorization': data } })
+                    $http.put(BASE_URL + 'projects/' + id, projectData, { headers: { 'Authorization': $http.defaults.headers.common.Authorization  } })
                         .then(function(result) {
-                            deferred.resolve(result);
-                            console.log(result);
+                            deferred.resolve(result);                            
                         });
 
                     return deferred.promise;

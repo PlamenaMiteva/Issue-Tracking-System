@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/toastr/build/toastr.css">
     <link rel="stylesheet" href="app.css">
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -43,11 +44,10 @@
     <div ng-controller="HomeCtrl">
         <script type="text/ng-template" id="login-notification.html">
             <div class="modal-body">
-                <p>{{message}}</p>
+                <div class="text-center">{{message}}</div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" type="button" ng-click=" ok()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
             </div>
         </script>
     </div>
@@ -60,6 +60,8 @@
         <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <script src="bower_components/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
         <script src="bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+        <script src="bower_components/toastr/build/toastr.min.js"></script>
         <script src="app.js"></script>
         <script src="dashboard/dashboard.js"></script>
         <script src="dashboard/dashboard-controller.js"></script>
@@ -67,7 +69,9 @@
         <script src="common/main-controller.js"></script>
         <script src="common/modal.js"></script>
         <script src="users/authentication.js"></script>
+        <script src="users/identity.js"></script>
         <script src="users/user-service.js"></script>
+        <script src="users/profile-controller.js"></script>
         <script src="projects/project-controller.js"></script>
         <script src="projects/edit-project-controller.js"></script>
         <script src="projects/project.js"></script>
