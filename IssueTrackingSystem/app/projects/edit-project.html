@@ -15,8 +15,8 @@
                     <label for="project-description">Description</label>
                     <input type="text" name = "project-description" id="project-description" required="required" ng-model="newProject.Description" placeholder ="{{project.Description}}" class="form-control" />
                     <br />
-                    <label for="project-lead">Project Manager</label>
-                    <select class="form-control" id="project-lead" name="project-lead" ng-model="newProject.LeadId" required>
+                    <label for="project-lead" ng-if="isAdmin">Project Manager</label>
+                    <select class="form-control" id="project-lead" name="project-lead" ng-if="isAdmin"  ng-model="newProject.LeadId" required>
                         <option ng-repeat="user in users" value="{{user.Id}}">
                             {{user.Username}}
                         </option>
@@ -27,13 +27,6 @@
                         <input type="text" ng-model="priority.Name" class="form-control" placeholder={{priority.Name}} />
                         <br>
                     </div>
-
-                    <!--<label for="project-priority">Priority</label>
-                    <select class="form-control" id="project-priority" name="project-priority" ng-model="newProject.PriorityId" required>
-                        <option ng-repeat="priority in project.Priorities" value="{{priority.Id}}">
-                            {{priority.Name}}
-                        </option>
-                    </select>-->
                     <br />
                     <div ng-if="project.Labels.length > 0">
                         <label for="labels">Labels</label>

@@ -13,20 +13,20 @@ angular.module('issueTrackingSystem.add-issue', [
         '$scope',        
         '$location',
         '$routeParams',
-        'authentication',
+        'identity',
         'issue',
         'project',
         'usersService',
         'label',        
-        function ($scope, $location, $routeParams, authentication, issue, project, usersService, label) {
+        function ($scope, $location, $routeParams, identity, issue, project, usersService, label) {
             $scope.isLead = false;
 
             project.getProjectById($routeParams.id)
                .then(function (project) {
                    $scope.project = project.data;
 
-                   authentication.getCurrentUser().then(function (response) {
-                       if (response.Username == project.data.Lead.Username) {
+                   identity.getCurrentUser().then(function (response) {                      
+                       if (response.Id == project.data.Lead.Id || response.isAdmin) {
                            $scope.isLead = true;
                        }
                    });

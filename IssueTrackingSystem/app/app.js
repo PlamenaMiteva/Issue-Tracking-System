@@ -14,7 +14,8 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.profile',
         'issueTrackingSystem.projects',
         'issueTrackingSystem.edit-project',
-        'issueTrackingSystem.project',        
+        'issueTrackingSystem.project',
+        'issueTrackingSystem.adminProjects',
         'issueTrackingSystem.issue',
         'issueTrackingSystem.issues',
         'issueTrackingSystem.edit-issue',
@@ -22,10 +23,16 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.label',
         'issueTrackingSystem.common.modal',
 ])
-    .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
-            $routeProvider.otherwise({redirectTo: '/'});
+    .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+        $routeProvider.when('/projects', {
+            templateUrl: 'projects/allProjects.html',
+            controller: 'adminProjectsCtrl',
+            isAdmin: 'true',
+        });
 
-            $httpProvider.interceptors.push(['$q','toastr', function($q, toastr) {
+      $routeProvider.otherwise({redirectTo: '/'});
+
+      $httpProvider.interceptors.push(['$q','toastr', function($q, toastr) {
                     return {
                             'responseError': function(rejection) {
                                     if (rejection.data && rejection.data['error_description']) {
@@ -42,6 +49,7 @@ angular.module('issueTrackingSystem', [
                             }
                     }
             }]);
+
     }])
     .run(['$rootScope', '$location', 'authentication', function($rootScope, $location, authentication) {
             $rootScope.$on('$routeChangeError', function(ev, current, previous, rejection) {
@@ -50,7 +58,7 @@ angular.module('issueTrackingSystem', [
                     }
             });
 
-            authentication.refreshCookie();
-    }])
+            authentication.refreshCookie();            
+    }])    
     .constant('toastr', toastr)
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');

@@ -1,0 +1,25 @@
+<div class="row-fluid">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading" id="projects-panel">
+                <h3 class="panel-title">Projects</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group" ng-repeat="project in projects">
+                    <li class="list-group-item">
+                        <b>{{project.Name}}</b>
+                        <a href="#/projects/{{project.Id}}/edit"><button class="btn btn-primary btn-responsive pull-right">Edit Project</button></a>
+                        <a href="#/projects/{{project.Id}}/add-issue"><button class="btn btn-primary btn-responsive pull-right" id="admin-edit-project">Add Issue</button></a>
+                    </li>
+                </ul>
+                <div class="text-center" id="admin-projects-pagination">
+                    <ul class="pagination pagination-sm" ng-if="projects.length > 0">
+                        <li><a href="" ng-click='projectPreviousPage()'><<</a></li>
+                        <li ng-repeat="projectPage in projectPageArray"><a href="" ng-click='getCurrentProjectPage(projectPage)'>{{projectPage}}</a></li>
+                        <li><a href="" ng-click='projectNextPage()'>>></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

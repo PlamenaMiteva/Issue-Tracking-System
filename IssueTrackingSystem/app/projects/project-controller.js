@@ -16,12 +16,21 @@ angular.module('issueTrackingSystem.projects', [
         'project',
         function ($scope, $routeParams, identity, project) {
             $scope.isLead = false;
+            $scope.isAdmin = false;
+
+            identity.getCurrentUser()
+                .then(function (user) {
+                    $scope.currentUserId = user.Id;
+                    if (user.isAdmin) {
+                        $scope.isAdmin = true;
+                    }
+                });
 
             project.getProjectById($routeParams.id)
                 .then(function (project) {
                     $scope.project = project.data;
                     var currentUser = identity.requestUserProfile();
-                    if(currentUser.Id === project.data.Lead.Id){
+                    if ($scope.currentUserId === project.data.Lead.Id) {
                         $scope.isLead = true;
                     }
                 });

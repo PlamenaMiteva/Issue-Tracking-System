@@ -59,6 +59,13 @@ angular.module('issueTrackingSystem.users.authentication', [])
                     return !!$cookies.get(AUTHENTICATION_COOKIE_KEY);
                 }
 
+                function isAdmin() {
+                    identity.getCurrentUser()
+                     .then(function (user) {                         
+                         return user.isAdmin;
+                });
+                }
+
                 function refreshCookie() {
                     if (isAuthenticated()) {
                         $http.defaults.headers.common.Authorization = 'Bearer ' + $cookies.get(AUTHENTICATION_COOKIE_KEY);
@@ -71,6 +78,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
                     loginUser: loginUser,
                     logout: logout,
                     refreshCookie: refreshCookie,
-                    isAuthenticated: isAuthenticated
+                    isAuthenticated: isAuthenticated,
+                    isAdmin: isAdmin
                 }
             }]);

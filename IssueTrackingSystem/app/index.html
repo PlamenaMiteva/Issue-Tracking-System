@@ -32,10 +32,11 @@
             </div>
 
             <div class="collapse navbar-collapse" id="home-navbar-2">
-                <ul class="nav navbar-nav" id="home-navbar-ul">
-                    <li id="home-li"><a href="#/">Home</a></li>
-                    <li id="logout-li" ng-show="auth==true"><a ng-controller="HomeCtrl" ng-click="logout()">Logout</a></li>
-                    <li id="change-password-li" ng-show="auth==true"><a href="#/profile/password">Change Password</a></li>
+                <ul class="nav navbar-nav" id="home-navbar-ul" ng-show="auth==true" ng-controller="HomeCtrl">
+                    <li id="home-li"><a href="#/">Dashboard</a></li>
+                    <li id="projects-li" ng-show="isAdmin"><a href="#/projects">Projects</a></li>
+                    <li id="logout-li"><a ng-click="logout()">Logout</a></li>
+                    <li id="change-password-li"><a href="#/profile/password">Change Password</a></li>
                 </ul>
             </div>
         </div>
@@ -73,6 +74,7 @@
         <script src="users/user-service.js"></script>
         <script src="users/profile-controller.js"></script>
         <script src="projects/project-controller.js"></script>
+        <script src="projects/admin-projects-controller.js"></script>
         <script src="projects/edit-project-controller.js"></script>
         <script src="projects/project.js"></script>
         <script src="issues/issue-controller.js"></script>

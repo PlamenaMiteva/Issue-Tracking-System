@@ -35,7 +35,7 @@
   border-color: #15a589;  
 }
 
-#navbar-logo, #home-li a, #logout-li a, #change-password-li a{
+#navbar-logo, #home-li a, #logout-li a, #change-password-li a, #projects-li a{
     color: white;
 }
 
@@ -58,11 +58,14 @@ a, a:hover, a:active{
   border-color: #15a589;  
 }
 
-#project-panel, #issue-panel, #status-panel, #add-issue-panel{
+#project-panel, #projects-panel, #issue-panel, #status-panel, #add-issue-panel{
     background-color:#15a589;
 }
 
-.list-group {line-height:30px}
+.list-group {
+    line-height:30px
+
+}
 
 #login-btn, #register-btn, #add-issue-btn{
     width: 100%;
@@ -102,7 +105,7 @@ thead{
     margin-top: 40px;
 }
 
-#projects-jumbotron, #issues-jumbotron{
+#issues-jumbotron{
     padding: 0.5em 0.6em;
     font-size: 3em;
     color: #15a589;
@@ -114,10 +117,35 @@ thead{
     border-color: gray;   
 }
 
-#my-projects, #my-issues{
+#my-issues{
     border-style:groove;
-    border-color: gray;
+    border-color: #eee;
     padding-bottom : 10px;
     padding-top: 10px;
 }
+
+.panel-info > .panel-heading{
+  background-color: #eee;
+  border-color: #15a589; 
+  font-size: 3em;  
+  color: #15a589;
+}
+
+.panel-info > .panel-heading>h3{ 
+  font-weight: bold;  
+}
+
+.pagination-sm>li>a{
+    color:#15a589;
+}
+
+#projects-pagination{
+    margin-left: 10px;
+}
+ 
+#admin-edit-project{
+   margin-right: 15px;
+}
+
+
 

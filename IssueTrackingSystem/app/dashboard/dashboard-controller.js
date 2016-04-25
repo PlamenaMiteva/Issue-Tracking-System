@@ -43,22 +43,21 @@ angular.module('issueTrackingSystem.board', [
                     $scope.myProjects = projects.data.filter(function (x) {
                         return x.Lead.Id == $scope.currentUserId;
                     });
-
+                    
                     dashboard.showUserDashboard($scope.totalPages*10, 1)
                         .then(function (result) {
                             $scope.allIssues = result.data.Issues;
                             $scope.allIssues.forEach(function(i){
                                 if ($scope.myProjects.indexOf(i.Project) == -1) {
-                                    $scope.myProjects.push(i.Project);
+                                    $scope.myProjects.push(i.Project);                                    
                                 };
                             });
+                            $scope.projects = $scope.myProjects.slice($scope.start, $scope.end);
+                            $scope.projectsPages = Math.ceil($scope.myProjects.length / 10);
+                            for (var i = 1; i <= $scope.projectsPages; i++) {
+                                $scope.projectPageArray.push(i);
+                            }
                         });
-
-                    $scope.projects = $scope.myProjects.slice($scope.start, $scope.end);
-                    $scope.projectsPages = Math.ceil($scope.myProjects.length / 10);
-                    for (var i = 1; i <= $scope.projectsPages; i++) {
-                        $scope.projectPageArray.push(i);
-                    }
                 });
 
             $scope.nextPage = function () {
@@ -101,6 +100,7 @@ angular.module('issueTrackingSystem.board', [
             };
 
             $scope.getCurrentProjectPage = function (page) {
+                $scope.projectPageNumber = page;
                 $scope.start = ((page-1) * 10);
                 $scope.end = page * 10;
                 $scope.projects = $scope.myProjects.slice($scope.start, $scope.end);

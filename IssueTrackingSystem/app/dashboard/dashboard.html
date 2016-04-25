@@ -2,34 +2,27 @@
     <div class="jumbotron" style="height: 100%">
         <h1 id="system-dashboard">System Dashboard</h1>
     </div>
-    <div class="col-md-4" id="my-projects">
-        <div class="jumbotron" id="projects-jumbotron">
-            <h4 id="projects-dashboard">My Projects</h4>
+        <div class="col-md-2" id="my-projects">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="projects-dashboard">My Projects</h3>
+                </div>
+                <div class="panel-body text-center" ng-if="projects.length > 0" ng-repeat="project in projects" ng-controller='BoardCtrl'>
+                    <a ng-href="#/projects/{{project.Id}}">{{project.Name}}</a>
+                </div>
+                <div class="panel-body" ng-if="projects.length==0">
+                    Currently you do not have any projects
+                </div>
+                <div class="text-center" id="projects-pagination">
+                    <ul class="pagination pagination-sm" ng-if="projects.length > 0">
+                        <li><a href="" ng-click='projectPreviousPage()'><<</a></li>
+                        <li ng-repeat="projectPage in projectPageArray"><a href="" ng-click='getCurrentProjectPage(projectPage)'>{{projectPage}}</a></li>
+                        <li><a href="" ng-click='projectNextPage()'>>></a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <table class="table table-striped" ng-if="projects.length>0">
-            <thead>
-                <tr>
-                    <td>Project</td>
-                    <td>Description</td>
-                </tr>
-            </thead>
-            <tbody ng-repeat="project in projects" ng-controller='BoardCtrl'>
-                <tr>
-                    <td><a ng-href="#/projects/{{project.Id}}">{{project.Name}}</a></td>
-                    <td>{{project.Description}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="text-center" id="dashboard-projects-pagination" ng-if="projects.length>0">
-            <ul class="pagination-lg">
-                <li class="btn btn-primary" ng-click='projectPreviousPage()'>Previous</li>
-                <li class="btn btn-primary" id="project-page-button" ng-model="projectPage" ng-repeat="projectPage in projectPageArray" ng-click='getCurrentProjectPage(projectPage)'>{{projectPage}}</li>
-                <li class="btn btn-primary" ng-click='projectNextPage()'>Next</li>
-            </ul>
-        </div>
-        <p class="text-center" ng-if="projects.length==0">Currently you do not have any projects</p>
-        </div>
-    <div class="col-md-7 col-md-offset-1" id="my-issues">
+    <div class="col-md-9 col-md-offset-1" id="my-issues">
         <div class="jumbotron" id="issues-jumbotron">
             <h4 id="assigned-to-me-dashboard">Assigned to Me</h4>
         </div>
@@ -51,13 +44,39 @@
                 </tr>
             </tbody>
         </table>
-        <div class="text-center" id="dashboard-issues-pagination" ng-if="issues.length > 0">
-            <ul class="pagination-lg">
-                <li class="btn btn-primary" ng-click='previousPage()'>Previous</li>
-                <li class="btn btn-primary" id="page-button" ng-model="page" ng-repeat="page in pageArray" ng-click='getCurrentPage(page)'>{{page}}</li>
-                <li class="btn btn-primary" ng-click='nextPage()'>Next</li>
+        <div class="text-center">
+            <ul class="pagination pagination-sm" ng-if="issues.length > 0">
+                <li><a href="" ng-click='previousPage()'><<</a></li>
+                <li ng-repeat="page in pageArray"><a href="" ng-click='getCurrentPage(page)'>{{page}}</a></li>
+                <li><a href="" ng-click='nextPage()'>>></a></li>
             </ul>
+            </div>
+            <p class="text-center" ng-if="issues.length==0">Currently there are not any issues assigned to you</p>
         </div>
-        <p class="text-center" ng-if="issues.length==0">Currently there are not any issues assigned to you</p>
-    </div>
 </div>
+
+
+<!--<div class="jumbotron" id="projects-jumbotron">
+    <h4 id="projects-dashboard">My Projects</h4>
+</div>
+<table class="table table-striped" ng-if="projects.length>0">
+    <thead>
+        <tr>
+            <td>Project Name</td>
+        </tr>
+    </thead>
+    <tbody ng-repeat="project in projects" ng-controller='BoardCtrl'>
+        <tr>
+            <td><a ng-href="#/projects/{{project.Id}}">{{project.Name}}</a></td>
+        </tr>
+    </tbody>
+</table>
+<div class="text-center" id="dashboard-projects-pagination" ng-if="projects.length > 0">
+    <ul class="pagination-lg">
+        <li class="btn btn-primary" ng-click='projectPreviousPage()'>Previous</li>
+        <li class="btn btn-primary" id="project-page-button" ng-model="projectPage" ng-repeat="projectPage in projectPageArray" ng-click='getCurrentProjectPage(projectPage)'>{{projectPage}}</li>
+        <li class="btn btn-primary" ng-click='projectNextPage()'>Next</li>
+    </ul>
+</div>
+<p class="text-center" ng-if="projects.length==0">Currently you do not have any projects</p>
+</div>-->
