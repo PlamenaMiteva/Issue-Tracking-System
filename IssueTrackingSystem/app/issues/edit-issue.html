@@ -30,7 +30,19 @@
                             </select>
                             <br />
                             <label for="issue-date">Due Date</label>
-                            <input type="text" name = "issueDueDate" id="issue-date" required="required" ng-model="newIssue.DueDate" placeholder ="{{issue.DueDate}}" class="form-control" />
+                            <pre><b>Selected Issue Deadline is: </b><em>{{dt | date:'fullDate' }}</em></pre>
+                            <div>
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" ng-change="setDueDate(dt)" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+
+                            
+                            <!--<input type="text" name = "issueDueDate" id="issue-date" required="required" ng-model="newIssue.DueDate" placeholder ="{{issue.DueDate}}" class="form-control" />-->
+                            
                             <br />
                             <div ng-if="issue.Labels.length > 0">
                             <label for="labels">Labels</label>
