@@ -21,14 +21,6 @@ angular.module('issueTrackingSystem.adminProjects', [
             $scope.projectPageArray = [];
             $scope.start = 0;
             $scope.end = 10;
-           // $scope.isAdmin = false;
-
-            //identity.getCurrentUser()
-            //    .then(function (user) {                   
-            //        if (user.isAdmin) {
-            //            $scope.isAdmin = true;
-            //        }
-            //    });
 
             dashboard.getAllProjects()
                 .then(function (projects) {

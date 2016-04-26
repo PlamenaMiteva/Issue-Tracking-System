@@ -35,6 +35,7 @@
                 <ul class="nav navbar-nav" id="home-navbar-ul" ng-show="auth==true" ng-controller="HomeCtrl">
                     <li id="home-li"><a href="#/">Dashboard</a></li>
                     <li id="projects-li" ng-show="isAdmin"><a href="#/projects">Projects</a></li>
+                    <li id="create-project-li" ng-show="isAdmin"><a href="#/projects/add">Create</a></li>
                     <li id="logout-li"><a ng-click="logout()">Logout</a></li>
                     <li id="change-password-li"><a href="#/profile/password">Change Password</a></li>
                 </ul>
@@ -76,6 +77,7 @@
         <script src="projects/project-controller.js"></script>
         <script src="projects/admin-projects-controller.js"></script>
         <script src="projects/edit-project-controller.js"></script>
+        <script src="projects/add-project-controller.js"></script>
         <script src="projects/project.js"></script>
         <script src="issues/issue-controller.js"></script>
         <script src="issues/issue.js"></script>

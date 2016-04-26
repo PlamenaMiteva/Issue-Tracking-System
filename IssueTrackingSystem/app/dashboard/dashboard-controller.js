@@ -56,7 +56,7 @@ angular.module('issueTrackingSystem.board', [
                             $scope.projectsPages = Math.ceil($scope.myProjects.length / 10);
                             for (var i = 1; i <= $scope.projectsPages; i++) {
                                 $scope.projectPageArray.push(i);
-                            }
+                            }                           
                         });
                 });
 

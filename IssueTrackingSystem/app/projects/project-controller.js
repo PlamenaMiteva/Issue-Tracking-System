@@ -4,7 +4,7 @@ angular.module('issueTrackingSystem.projects', [
         'issueTrackingSystem.project'
 ])
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/projects/:id', {
+        $routeProvider.when('/projects/:id:[1-9]\\d*', {
             templateUrl: 'projects/project.html',
             controller: 'ProjectCtrl'
         })
@@ -28,7 +28,7 @@ angular.module('issueTrackingSystem.projects', [
 
             project.getProjectById($routeParams.id)
                 .then(function (project) {
-                    $scope.project = project.data;
+                    $scope.project = project.data;                   
                     var currentUser = identity.requestUserProfile();
                     if ($scope.currentUserId === project.data.Lead.Id) {
                         $scope.isLead = true;

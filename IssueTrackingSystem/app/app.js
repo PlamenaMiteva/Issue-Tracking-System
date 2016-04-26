@@ -14,6 +14,7 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.profile',
         'issueTrackingSystem.projects',
         'issueTrackingSystem.edit-project',
+        'issueTrackingSystem.addProject',
         'issueTrackingSystem.project',
         'issueTrackingSystem.adminProjects',
         'issueTrackingSystem.issue',
@@ -27,7 +28,13 @@ angular.module('issueTrackingSystem', [
         $routeProvider.when('/projects', {
             templateUrl: 'projects/allProjects.html',
             controller: 'adminProjectsCtrl',
-            isAdmin: 'true',
+            isAdmin: 'true'
+        });
+
+        $routeProvider.when('/projects/add', {
+            templateUrl: 'projects/add-project.html',
+            controller: 'AddProjectCtrl',
+            isAdmin: 'true'
         });
 
       $routeProvider.otherwise({redirectTo: '/'});

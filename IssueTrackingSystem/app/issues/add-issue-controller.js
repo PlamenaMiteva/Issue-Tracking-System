@@ -40,7 +40,7 @@ angular.module('issueTrackingSystem.add-issue', [
 
 
             $scope.getAllLabels = function (val) {
-                var data = "Bearer " + JSON.parse(sessionStorage['currentUser']).access_token;
+                var data = $http.defaults.headers.common.Authorization;
                 return label.getLabels(val);
             }
 

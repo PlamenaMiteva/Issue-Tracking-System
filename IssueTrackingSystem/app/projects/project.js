@@ -37,11 +37,23 @@ angular.module('issueTrackingSystem.project', [])
 
                     return deferred.promise;
                 }
+
+                function addProject(addProject) {
+                    var deferred = $q.defer();
+
+                    $http.post(BASE_URL + 'Projects/', addProject, { headers: { 'Authorization': $http.defaults.headers.common.Authorization } })
+                        .then(function (result) {
+                            deferred.resolve(result);
+                        });
+
+                    return deferred.promise;
+                }
                
                 return {
                     getProjectById: getProjectById,
                     getProjectIssues: getProjectIssues,
-                    editProject : editProject
+                    editProject: editProject,
+                    addProject: addProject
                 }
             }]);
 
