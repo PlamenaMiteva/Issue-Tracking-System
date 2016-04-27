@@ -1,5 +1,7 @@
 /* app css stylesheet */
-
+body{
+    color: gray;
+}
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -67,7 +69,7 @@ a, a:hover, a:active{
 
 }
 
-#login-btn, #register-btn, #add-issue-btn{
+#login-btn, #register-btn, #add-issue-btn, profile-btn{
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -145,6 +147,11 @@ thead{
  
 #admin-edit-project{
    margin-right: 15px;
+}
+
+#profile-form{
+    border: 1px solid gray;
+    padding: 60px;
 }
 
 

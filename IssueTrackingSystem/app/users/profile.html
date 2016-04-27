@@ -1,31 +1,31 @@
 <div class="margin-bottom-100" >
     <div class="row">
-        <div class="col-md-8 " id="profile-form">
+        <div class="col-md-6 col-md-offset-3 " id="profile-form">
             <fieldset>
-                <legend id="profile-legend">CHANGE PASSWORD</legend>
+                <legend id="profile-legend"><span class="glyphicon glyphicon-refresh"></span> CHANGE PASSWORD</legend>
                 <form name="userProfileForm">
-                    <label for="oldPassword">Old Password</label>
+                    <label for="oldPassword"><span class="glyphicon glyphicon-eye-open"></span> Old Password</label>
                     <input type="password" name="oldPassword" required="required" ng-model="user.oldPassword" id="oldPassword" class="form-control" />
                     <div class="error-message"
                          ng-show="userProfileForm.oldPassword.$invalid && !userProfileForm.oldPassword.$pristine">
                         Please enter your old password.
                     </div>
                     <br />
-                    <label for="newPassword">New Password</label>
+                    <label for="newPassword"><span class="glyphicon glyphicon-lock"></span> New Password</label>
                     <input type="password" name="newPassword" required="required" ng-minlength="6" ng-maxlength="100" ng-model="user.newPassword" id="newPassword" class="form-control" />
                     <div class="error-message"
                          ng-show="userProfileForm.newPassword.$invalid && !userProfileForm.newPassword.$pristine">
-                         Password must be between 6 and 100 characters.
+                        Password must be between 6 and 100 characters.
                     </div>
                     <br />
-                    <label for="confirm-password">Confirm Password</label>
+                    <label for="confirm-password"><span class="glyphicon glyphicon-ok"></span> Confirm Password</label>
                     <input type="password" name="confirmPassword" required="required" ng-pattern="user.newPassword" ng-model="user.confirmPassword" id="confirm-password" class="form-control" />
                     <div class="error-message"
                          ng-show="userProfileForm.confirmPassword.$invalid && !userProfileForm.confirmPassword.$pristine">
                         Sorry, the passwords do not match.
                     </div>
                     <br />
-                    <button class="btn btn-primary" id="profile-btn" ng-disabled="userProfileForm.$invalid" ng-click="changePassword(user)">CONTINUE</button>
+                    <button class="btn btn-primary" id="profile-btn" ng-disabled="userProfileForm.$invalid" ng-click="changePassword(user)"><span class="glyphicon glyphicon-off"></span> CONTINUE</button>
                 </form>
             </fieldset>
         </div>

@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('issueTrackingSystem', [
+        'ui.router',
         'ngRoute',
         'ngCookies',
         "ui.bootstrap",
@@ -24,7 +25,7 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.label',
         'issueTrackingSystem.common.modal',
 ])
-    .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+    .config(['$routeProvider', '$httpProvider', '$stateProvider', '$urlRouterProvider', function ($routeProvider, $httpProvider, $stateProvider, $urlRouterProvider) {
         $routeProvider.when('/projects', {
             templateUrl: 'projects/allProjects.html',
             controller: 'adminProjectsCtrl',
@@ -35,6 +36,11 @@ angular.module('issueTrackingSystem', [
             templateUrl: 'projects/add-project.html',
             controller: 'AddProjectCtrl',
             isAdmin: 'true'
+        });
+
+        $routeProvider.when('/projects/:id', {
+            templateUrl: 'projects/project.html',
+            controller: 'ProjectCtrl'
         });
 
       $routeProvider.otherwise({redirectTo: '/'});

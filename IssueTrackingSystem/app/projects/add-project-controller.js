@@ -3,13 +3,6 @@
 angular.module('issueTrackingSystem.addProject', [
         'issueTrackingSystem.project'
 ])
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/projects/add',
-            {
-            templateUrl: 'projects/add-project.html',
-            controller: 'AddProjectCtrl'
-        })
-    }])
     .controller('AddProjectCtrl', [
         '$scope',        
         '$location',
@@ -23,6 +16,14 @@ angular.module('issueTrackingSystem.addProject', [
             $scope.project = {};
             $scope.project.Labels = [];
             $scope.project.Priorities = [];
+            $scope.isAdmin = false;
+
+            identity.getCurrentUser()
+                .then(function (user) {
+                    if (user.isAdmin) {
+                        $scope.isAdmin = true;
+                    }
+                });
 
             usersService.getAllUsers()
                .then(function (response) {
@@ -51,7 +52,7 @@ angular.module('issueTrackingSystem.addProject', [
                 $scope.project.Priorities.push(newPriority);
             }
 
-            $scope.checkKey = function (key) {
+            $scope.checkKey = function (key) {                
                 var abbr = $scope.project.Name.split(' ').map(function (item) { return item[0] }).join('');
                 
                 if (key == abbr) {

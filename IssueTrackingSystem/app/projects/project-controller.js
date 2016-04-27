@@ -3,12 +3,6 @@
 angular.module('issueTrackingSystem.projects', [
         'issueTrackingSystem.project'
 ])
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/projects/:id:[1-9]\\d*', {
-            templateUrl: 'projects/project.html',
-            controller: 'ProjectCtrl'
-        })
-    }])
     .controller('ProjectCtrl', [
         '$scope',
         '$routeParams',
