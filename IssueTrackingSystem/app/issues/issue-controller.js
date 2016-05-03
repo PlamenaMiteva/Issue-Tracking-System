@@ -10,10 +10,10 @@ angular.module('issueTrackingSystem.issues', [
         })
     }])
     .controller('IssueCtrl', [
-        '$scope',
+        '$scope',        
         '$routeParams',
         'issue',
-        function ($scope, $routeParams, issue) {
+        function ($scope, $routeParams, issue) {  
             issue.getIssueById($routeParams.id)
                 .then(function (issue) {
                     $scope.issue = issue.data;                   

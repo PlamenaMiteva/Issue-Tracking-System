@@ -4,6 +4,7 @@ angular.module('issueTrackingSystem', [
         'ui.router',
         'ngRoute',
         'ngCookies',
+        'ngAnimate',
         "ui.bootstrap",
         'issueTrackingSystem.common',
         'issueTrackingSystem.home',
@@ -22,6 +23,8 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.issues',
         'issueTrackingSystem.edit-issue',
         'issueTrackingSystem.add-issue',
+        'issueTrackingSystem.comment',
+        'issueTrackingSystem.comments',
         'issueTrackingSystem.label',
         'issueTrackingSystem.common.modal',
 ])

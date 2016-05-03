@@ -60,7 +60,7 @@ a, a:hover, a:active{
   border-color: #15a589;  
 }
 
-#project-panel, #projects-panel, #issue-panel, #status-panel, #add-issue-panel{
+#project-panel, #projects-panel, #issue-panel, #status-panel, #add-issue-panel, #comment-panel{
     background-color:#15a589;
 }
 
@@ -69,7 +69,7 @@ a, a:hover, a:active{
 
 }
 
-#login-btn, #register-btn, #add-issue-btn, profile-btn{
+#login-btn, #register-btn, #add-issue-btn, #profile-btn, #comments-btn, #edit-issue-btn, #add-comment-btn{
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;

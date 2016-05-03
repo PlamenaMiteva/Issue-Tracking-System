@@ -2,43 +2,74 @@
     <div class="jumbotron" style="height: 100%">
         <h1 id="issue-details">Issue Details</h1>
     </div>
-        <div class="col-sm-9 col-md-6 col-lg-8">
-            <div class="panel panel-primary">
-                <div class="panel-heading" id="issue-panel">
-                    <h3 class="panel-title">{{issue.IssueKey}}</h3>
-                </div>
-                <div class="panel-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <b>Title: </b>{{issue.Title}}
-                        </li>
-                        <li class="list-group-item">
-                            <b>Description: </b>{{issue.Description}}
-                       </li>
-                        <li class="list-group-item">
-                        <b>AssigneeId: </b>{{issue.Assignee.Id}}
+    <div class="col-sm-9 col-md-6 col-lg-8 col-md-offset-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading" id="issue-panel">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;{{issue.IssueKey}}</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <b><span class="glyphicon glyphicon-pushpin"></span>&nbsp;&nbsp;Title: </b>{{issue.Title}}
                     </li>
-                        <li class="list-group-item">
-                            <b>PriorityId: </b>{{issue.Priority.Id}}
-                        </li>
-                        <li class="list-group-item">
-                            <b>Due Date: </b>{{issue.DueDate | date:'yyyy-MM-dd'}}
-                        </li>
-                        <li class="list-group-item">
-                        <b>Author: </b>{{issue.Author.Username}}
+                    <li class="list-group-item">
+                        <b><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Description: </b>{{issue.Description}}
                     </li>
-                        <li class="list-group-item">
-                            <b>Project: </b>{{issue.Project.Name}}
-                        </li>
-                        <li class="list-group-item">
-                            <b>Status: </b>{{issue.Status.Name}}
-                        </li>
-                        <li class="list-group-item">
-                            <b>Labels: </b><span ng-repeat="label in issue.Labels">{{label.Name}}{{$last ? '' : ', '}}</span>
-                        </li>
-                    </ul>
-                    <a href="#/issues/{{issue.Id}}/edit"><button class="btn btn-primary">Edit</button></a>
+                    <li class="list-group-item">
+                        <b><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Assignee: </b>{{issue.Assignee.Username}} (Id: {{issue.Assignee.Id}})
+                    </li>                    
+                    <li class="list-group-item">
+                        <b><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;PriorityId: </b>{{issue.Priority.Id}}
+                    </li>
+                    <li class="list-group-item">
+                        <b><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Due Date: </b>{{issue.DueDate | date:'yyyy-MM-dd'}}
+                    </li>
+                    <li class="list-group-item">
+                        <b><span class="glyphicon glyphicon-king"></span>&nbsp;&nbsp;Author: </b>{{issue.Author.Username}}
+                    </li>
+                    <li class="list-group-item">
+                        <b><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Project: </b>{{issue.Project.Name}}
+                    </li>
+                    <li class="list-group-item">
+                        <b><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;Status: </b>{{issue.Status.Name}}
+                    </li>
+                    <li class="list-group-item">
+                        <b><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;Labels: </b><span ng-repeat="label in issue.Labels">{{label.Name}}{{$last ? '' : ', '}}</span>
+                    </li>
+                </ul>
+                <a href="#/issues/{{issue.Id}}/edit"><button class="btn btn-primary" id="edit-issue-btn"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;EDIT ISSUE</button></a>
+                <div ng-controller="CommentCtrl">
+                    <div>
+                        <button type="button" id="comments-btn" class="btn btn-primary" ng-click="isCollapsed = !isCollapsed"><span class="glyphicon glyphicon-menu-hamburger"></span>&nbsp;&nbsp;SHOW COMMENTS</button>
+                    </div>
+                    <div uib-collapse="isCollapsed">
+                        <div class="panel panel-primary" ng-repeat="comment in comments | orderBy:'-CreatedOn'">
+                            <div class="panel-heading" id="comment-panel">
+                                <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> {{comment.Author.Username}} created on {{comment.CreatedOn | date:'dd MMMM yyyy'}}</h3>
+                            </div>
+                            <div class="panel-body">
+                                {{comment.Text}}
+                            </div>
+                        </div>
+                        <form role="form" name="addCommentForm">
+                            <div class="form-group">                               
+                                <input type="text" class="form-control" id="commentText" placeholder="leave your comment here..." required="required" ng-model="newComment.Text">
+                            </div>
+                            <button class="btn btn-primary" id="add-comment-btn" ng-disabled="addCommentForm.$invalid" ng-click="addComment(issue.Id, newComment)"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Add Comment</button>
+                        </form>
+                    </div>
                 </div>
+                
             </div>
         </div>
-</div>
+    </div>
+</div>    
+    
+
+
+
+
+
+
+
+

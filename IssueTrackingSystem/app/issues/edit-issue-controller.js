@@ -11,18 +11,19 @@ angular.module('issueTrackingSystem.edit-issue', [
     }])
     .controller('EditIssueCtrl', [
         '$scope',
+        '$rootScope',
         '$location',
         '$routeParams',
         'issue',
         'project',
         'identity',
         'usersService',
-        function ($scope, $location, $routeParams, issue, project, identity, usersService) {
+        function ($scope, $rootScope, $location, $routeParams, issue, project, identity, usersService) {
             issue.getIssueById($routeParams.id)
                 .then(function (issue) {
                     $scope.issue = issue.data;                    
-                    $scope.isLead = false;
-                    $scope.isAssignee = false;
+                    $rootScope.isLead = false;
+                    $rootScope.isAssignee = false;
 
                     identity.getCurrentUser()
                    .then(function (user) {                       

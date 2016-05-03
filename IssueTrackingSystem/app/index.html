@@ -33,7 +33,7 @@
 
             <div class="collapse navbar-collapse" id="home-navbar-2">
                 <ul class="nav navbar-nav" id="home-navbar-ul" ng-show="auth==true" ng-controller="HomeCtrl">
-                    <li id="home-li"><a href="#/"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+                    <li id="home-li"><a href="#/"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
                     <li id="projects-li" ng-show="isAdmin"><a href="#/projects"><span class="glyphicon glyphicon-list-alt"></span> Projects</a></li>
                     <li id="create-project-li" ng-show="isAdmin"><a href="#/projects/add"><span class="glyphicon glyphicon-file"></span> Create</a></li>
                     <li id="logout-li"><a ng-click="logout()"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
@@ -64,6 +64,7 @@
         <script src="bower_components/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
         <script src="bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
         <script src="bower_components/toastr/build/toastr.min.js"></script>
         <script src="app.js"></script>
         <script src="dashboard/dashboard.js"></script>
@@ -84,6 +85,8 @@
         <script src="issues/issue.js"></script>
         <script src="issues/edit-issue-controller.js"></script>
         <script src="issues/add-issue-controller.js"></script>
+        <script src="comments/comment.js"></script>
+        <script src="comments/comment-controller.js"></script>
         <script src="labels/label.js"></script>
         <script src="components/version/version.js"></script>
         <script src="components/version/version-directive.js"></script>
