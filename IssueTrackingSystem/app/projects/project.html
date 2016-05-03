@@ -5,27 +5,27 @@
         <div class="col-sm-3 col-md-6 col-lg-4">
             <div class="panel panel-primary">
                 <div class="panel-heading" id="project-panel">
-                    <h3 class="panel-title">{{project.Name}}</h3>
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-pushpin"></span>&nbsp;&nbsp;<b>{{project.Name}}</b></h3>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <b>Project Key: </b>{{project.ProjectKey}}
+                            <b><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Project Key: </b>{{project.ProjectKey}}
                         </li>
                         <li class="list-group-item">
-                            <b>Description: </b>{{project.Description}}
+                            <b><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Description: </b>{{project.Description}}
                        </li>
                         <li class="list-group-item">
-                            <b>LeadId: </b>{{project.Lead.Id}}                            
+                            <b><span class="glyphicon glyphicon-king"></span>&nbsp;&nbsp;Project Manager: </b>{{project.Lead.Username}} <p><b><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;Id:</b> {{project.Lead.Id}}</p>                            
                         </li>
                         <li class="list-group-item">
-                            <b>Labels: </b><span ng-repeat="label in project.Labels">{{label.Name}}{{$last ? '' : ', '}}</span>
+                            <b><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;Labels: </b><span ng-repeat="label in project.Labels">{{label.Name}}{{$last ? '' : ', '}}</span>
                         </li>
                         <li class="list-group-item">
-                            <b>Priorities: </b><span ng-repeat="priority in project.Priorities">{{priority.Name}}{{$last ? '' : ', '}}</span>
+                            <b><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Priorities: </b><span ng-repeat="priority in project.Priorities">{{priority.Name}}{{$last ? '' : ', '}}</span>
                         </li>
                     </ul>
-                    <a href="#/projects/{{project.Id}}/edit"><button class="btn btn-primary" ng-if="isLead">Edit Project</button></a>
+                    <a href="#/projects/{{project.Id}}/edit"><button class="btn btn-primary" ng-if="isLead"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit Project</button></a>
                     <a href="#/projects/{{project.Id}}/add-issue"><button class="btn btn-primary" ng-if="isLead">Add Issue</button></a>
 </div>
             </div>

@@ -7,9 +7,9 @@
             <div class="panel-body">
                 <ul class="list-group" ng-repeat="project in projects">
                     <li class="list-group-item">
-                        <b>{{project.Name}}</b>
-                        <a href="#/projects/{{project.Id}}/edit"><button class="btn btn-primary btn-responsive pull-right">Edit Project</button></a>
-                        <a href="#/projects/{{project.Id}}/add-issue"><button class="btn btn-primary btn-responsive pull-right" id="admin-edit-project">Add Issue</button></a>
+                        <b><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp{{project.Name}}</b>
+                        <a href="#/projects/{{project.Id}}/edit"><button class="btn btn-primary btn-responsive pull-right"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit Project</button></a>
+                        <a href="#/projects/{{project.Id}}/add-issue"><button class="btn btn-primary btn-responsive pull-right" id="admin-edit-project"><span class="glyphicon glyphicon-import"></span>&nbsp;&nbspAdd Issue</button></a>
                     </li>
                 </ul>
                 <div class="text-center" id="admin-projects-pagination">

@@ -18,10 +18,10 @@ angular.module('issueTrackingSystem.board', [
             $scope.pageSize = 10;
             $scope.pageArray = [];
             $scope.projectPageNumber = 1;
-            $scope.projectPageSize = 10;
+            $scope.projectPageSize = 15;
             $scope.projectPageArray = [];
             $scope.start = 0;
-            $scope.end = 10;
+            $scope.end = 15;
 
             identity.getCurrentUser()
                 .then(function (user) {
@@ -53,7 +53,7 @@ angular.module('issueTrackingSystem.board', [
                                 };
                             });
                             $scope.projects = $scope.myProjects.slice($scope.start, $scope.end);
-                            $scope.projectsPages = Math.ceil($scope.myProjects.length / 10);
+                            $scope.projectsPages = Math.ceil($scope.myProjects.length / $scope.projectPageSize);
                             for (var i = 1; i <= $scope.projectsPages; i++) {
                                 $scope.projectPageArray.push(i);
                             }                           
@@ -93,16 +93,16 @@ angular.module('issueTrackingSystem.board', [
             $scope.projectNextPage = function () {
                 if ($scope.projectPageNumber < $scope.projectsPages) {
                     $scope.projectPageNumber++;
-                    $scope.start += 10;
-                    $scope.end += 10;
+                    $scope.start += $scope.projectPageSize;
+                    $scope.end += $scope.projectPageSize;
                     $scope.projects = $scope.myProjects.slice($scope.start, $scope.end);
                 }
             };
 
             $scope.getCurrentProjectPage = function (page) {
                 $scope.projectPageNumber = page;
-                $scope.start = ((page-1) * 10);
-                $scope.end = page * 10;
+                $scope.start = ((page - 1) * $scope.projectPageSize);
+                $scope.end = page * $scope.projectPageSize;
                 $scope.projects = $scope.myProjects.slice($scope.start, $scope.end);
                 console.log($scope.projects);
             };
@@ -110,8 +110,8 @@ angular.module('issueTrackingSystem.board', [
             $scope.projectPreviousPage = function () {
                 if ($scope.projectPageNumber > 1) {
                     $scope.projectPageNumber--;
-                    $scope.start -= 10;
-                    $scope.end -= 10;
+                    $scope.start -= $scope.projectPageSize;
+                    $scope.end -= $scope.projectPageSize;
                     $scope.projects = $scope.myProjects.slice($scope.start, $scope.end);                  
                 }
             };
