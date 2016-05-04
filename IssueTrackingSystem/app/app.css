@@ -75,6 +75,10 @@ a, a:hover, a:active{
     margin-bottom: 20px;
 }
 
+#filter-btn{
+    width: 100%;    
+}
+
 #login-btn{    
     margin-top: 100px;
     margin-bottom: 20px;

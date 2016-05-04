@@ -31,6 +31,59 @@
             </div>
         </div>
         <div class="col-sm-9 col-md-6 col-lg-8">
+            <button class="btn btn-primary" id="filter-btn"><span class="glyphicon glyphicon-filter"></span>&nbsp;&nbsp;Choose Issue Filters</button>
+            <!-- Modal -->
+            <div class="modal fade" id="filterModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header" style="padding:35px 50px;">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4><span class="glyphicon glyphicon-menu-down"></span> SELECT FILTERS</h4>
+                        </div>
+                        <div class="modal-body" style="padding:40px 50px;">                           
+                            <form role="form" name="filterForm">
+                                <div class="form-group">
+                                    <label for="filterParametar"><span class="glyphicon glyphicon-filter"></span> Filter</label>
+                                    <select class="form-control" id="parametar" name="parametar" ng-model="filter.parametar" required="required">
+                                        <option value="Title">Title</option>
+                                        <option value="DueDate">DueDate</option>
+                                        <option value="DueDate.Day">DueDate.Day</option>
+                                        <option value="DueDate.Month">DueDate.Month</option>
+                                        <option value="DueDate.Year">DueDate.Year</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" ng-show="filter.parametar=='DueDate.Month'">
+                                    <label for="startMonth"><span class="glyphicon glyphicon-calendar"></span> Start Month</label>
+                                    <select class="form-control" id="startMonth" name="startMonth" ng-model="filter.startMonth">
+                                        <option ng-repeat="month in months" value="{{months.indexOf(month)+ 1}}">
+                                            {{month}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group" ng-show="filter.parametar=='DueDate.Month'">
+                                    <label for="endMonth"><span class="glyphicon glyphicon-calendar"></span> End Month</label>
+                                    <select class="form-control" id="endMonth" name="endMonth" ng-model="filter.endMonth">
+                                        <option ng-repeat="month in months" value="{{months.indexOf(month)+ 1}}">
+                                            {{month}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group" ng-show="filter.parametar=='Title'">
+                                    <label for="value"><span class="glyphicon glyphicon-asterisk"></span> Value</label>
+                                    <input type="text" class="form-control" id="value" required="required" ng-model="filter.value">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block" ng-click="addFilter(filter)"><span class="glyphicon glyphicon-upload"></span> Add Filter</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-default pull-right" ng-click="getFilteredIssues()"><span class="glyphicon glyphicon-ok"></span> Finish</button>
+                            <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -51,3 +104,11 @@
             </table>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#filter-btn").click(function () {
+            $("#filterModal").modal();
+        });
+    });
+</script>

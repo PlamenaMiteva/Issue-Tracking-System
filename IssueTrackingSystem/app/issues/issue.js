@@ -16,6 +16,17 @@ angular.module('issueTrackingSystem.issue', [])
                     return deferred.promise;
                 }
 
+                function getFilteredIssues(pageSize, pageNumber, filter) {
+                    var deferred = $q.defer();
+
+                    $http.get(BASE_URL + 'issues?pageSize=' + pageSize + '&pageNumber=' + pageNumber + 'filter=' + filter, { headers: { 'Authorization': $http.defaults.headers.common.Authorization } })
+                            .then(function (result) {
+                                deferred.resolve(result);
+                            });
+
+                    return deferred.promise;
+                }
+
                 function changeStatus(issueId, statusId) {
                     var deferred = $q.defer();
 
@@ -52,6 +63,7 @@ angular.module('issueTrackingSystem.issue', [])
 
                 return {
                     getIssueById: getIssueById,
+                    getFilteredIssues: getFilteredIssues,
                     changeStatus: changeStatus,
                     editIssue: editIssue,
                     addIssue : addIssue
