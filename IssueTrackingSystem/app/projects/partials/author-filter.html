@@ -1,0 +1,29 @@
+<div ng-controller="ProjectCtrl">
+    <form name="authorForm">
+        <label for="author-id-filter"><span class="glyphicon glyphicon-asterisk"></span> Author Id</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="author-id-filter" name="authorId" ng-model="filter.authorId" require ng-pattern="/^[><=][=]?[0-9]+/">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <div class="custom-error" ng-show="authorForm.authorId.$error.pattern">
+            Invalid filter!
+        </div>
+        <label for="author-username-filter"><span class="glyphicon glyphicon-asterisk"></span> Author Username</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="author-username-filter" ng-model="filter.authorUsername">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <label for="author-isAdmin-filter"><span class="glyphicon glyphicon-asterisk"></span> Author IsAdmin</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="author-isAdmin-filter" ng-model="filter.authorisAdmin">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+    </form>
+</div>
+

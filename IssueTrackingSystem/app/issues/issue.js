@@ -19,7 +19,7 @@ angular.module('issueTrackingSystem.issue', [])
                 function getFilteredIssues(pageSize, pageNumber, filter) {
                     var deferred = $q.defer();
 
-                    $http.get(BASE_URL + 'issues?pageSize=' + pageSize + '&pageNumber=' + pageNumber + 'filter=' + filter, { headers: { 'Authorization': $http.defaults.headers.common.Authorization } })
+                    $http.get(BASE_URL + 'issues?pageSize=' + pageSize + '&pageNumber=' + pageNumber + '&filter=' + filter, { headers: { 'Authorization': $http.defaults.headers.common.Authorization } })
                             .then(function (result) {
                                 deferred.resolve(result);
                             });

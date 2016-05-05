@@ -1,0 +1,29 @@
+<div ng-controller="ProjectCtrl">
+    <form name="assigneeForm">
+        <label for="assignee-id-filter"><span class="glyphicon glyphicon-asterisk"></span> Assignee Id</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="assignee-id-filter" name="assigneeId" ng-model="filter.assigneeId" require ng-pattern="/^[><=][=]?[0-9]+/">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <div class="custom-error" ng-show="assigneeForm.assigneeId.$error.pattern">
+            Invalid filter!
+        </div>
+        <label for="assignee-username-filter"><span class="glyphicon glyphicon-asterisk"></span> Assignee Username</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="assignee-username-filter" ng-model="filter.assigneeUsername">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <label for="assignee-isAdmin-filter"><span class="glyphicon glyphicon-asterisk"></span> Assignee IsAdmin</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="assignee-isAdmin-filter" ng-model="filter.assigneeisAdmin">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,24 @@
+<div ng-controller="ProjectCtrl">
+    <form name="priorityForm">
+        <label for="priority-id-filter"><span class="glyphicon glyphicon-asterisk"></span> Priority Id</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="priority-id-filter" name="priorityId" ng-model="filter.priorityId" require ng-pattern="/^[><=][=]?[0-9]+/">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <div class="custom-error" ng-show="priorityForm.priorityId.$error.pattern">
+            Invalid filter!
+        </div>
+        <label for="priority-name-filter"><span class="glyphicon glyphicon-asterisk"></span> Priority Name</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="priority-name-filter" ng-model="filter.priorityName">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+    </form>
+</div>
+
+
+

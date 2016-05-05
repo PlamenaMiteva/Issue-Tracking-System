@@ -1,0 +1,21 @@
+<div ng-controller="ProjectCtrl">
+    <form name="statusForm">
+        <label for="status-id-filter"><span class="glyphicon glyphicon-asterisk"></span> Status Id</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="status-id-filter" name="statusId" ng-model="filter.statusId" require ng-pattern="/^[><=][=]?[0-9]+/">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <div class="custom-error" ng-show="statusForm.statusId.$error.pattern">
+            Invalid filter!
+        </div>
+        <label for="status-name-filter"><span class="glyphicon glyphicon-asterisk"></span> Status Name</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="status-name-filter" name="statusName" ng-model="filter.statusName">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+    </form>
+</div>

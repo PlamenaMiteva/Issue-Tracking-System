@@ -1,0 +1,66 @@
+<div ng-controller="ProjectCtrl">
+    <form name="issueForm">
+        <label for="id-filter"><span class="glyphicon glyphicon-asterisk"></span> Issue Id</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="id-filter" name ="issueId" ng-model="filter.id" require ng-pattern="/^[><=][=]?[0-9]+/">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <div class="custom-error" ng-show="issueForm.issueId.$error.pattern">
+            Invalid filter!
+        </div>
+        <label for="title-filter"><span class="glyphicon glyphicon-asterisk"></span> Title</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="title-filter" ng-model="filter.title">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <label for="issue-key-filter"><span class="glyphicon glyphicon-asterisk"></span> Issue Key</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="issue-key-filter" ng-model="filter.issueKey">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <label for="description-filter"><span class="glyphicon glyphicon-asterisk"></span> Description</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="description-filter" ng-model="filter.description">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <label for="day-filter"><span class="glyphicon glyphicon-asterisk"></span> Deadline Day</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="day-filter" name="day" ng-model="filter.day" require ng-pattern="/^[><=][=]?[0-9]+/">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <div class="custom-error" ng-show="issueForm.day.$error.pattern">
+            Invalid filter!
+        </div>
+        <label for="month-filter"><span class="glyphicon glyphicon-asterisk"></span> Deadline Month</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="month-filter" name = "month" ng-model="filter.month" require ng-pattern="/^[><=][=]?[0-9]+/">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <div class="custom-error" ng-show="issueForm.month.$error.pattern">
+            Invalid filter!
+        </div>
+        <label for="year-filter"><span class="glyphicon glyphicon-asterisk"></span> Deadline Year</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="year-filter" name = "year" ng-model="filter.year" require ng-pattern="/^[><=][=]?[0-9]+/">
+            <span class="input-group-btn"><button class="btn btn-primary" id="add-filter-btn" ng-click="addFilter(filter)">AND</button></span>
+            <span class="input-group-btn"><button class="btn btn-info" id="or-filter-btn" ng-click="orFilter(filter)">OR</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="finish-filter-btn" ng-click="finishFilter(filter)">FINISH</button></span>
+        </div>
+        <div class="custom-error" ng-show="issueForm.year.$error.pattern">
+            Invalid filter!
+        </div>
+    </form>
+</div>
+

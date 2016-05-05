@@ -162,4 +162,22 @@ thead{
     margin-right:3px;
 }
 
+.custom-error{
+    color:red;
+    font-weight: bold; 
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+
+.btn-info, .btn-info:hover, .btn-info:active, .btn-info:focus {
+  background-color: #ffa22f;
+  border-color: #ffa22f;  
+}
+
+.btn-default, .btn-default:hover, .btn-default:active, .btn-default:focus {
+  background-color: #3599b7;
+  border-color: #3599b7;
+  color:white;  
+}
+
 
