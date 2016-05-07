@@ -13,10 +13,19 @@ angular.module('issueTrackingSystem.issues', [
         '$scope',        
         '$routeParams',
         'issue',
-        function ($scope, $routeParams, issue) {  
+        'identity',
+        function ($scope, $routeParams, issue, identity) {
             issue.getIssueById($routeParams.id)
                 .then(function (issue) {
-                    $scope.issue = issue.data;                   
-                });           
-
+                    $scope.issue = issue.data;
+                    identity.getCurrentUser()
+                        .then(function (user) {
+                            if (user.Id === issue.data.Author.Id) {
+                                $scope.isLead = true;
+                            }
+                            if (user.Id === issue.data.Assignee.Id) {
+                                $scope.isAssignee = true;
+                            }
+                        });
+                });
         }]);

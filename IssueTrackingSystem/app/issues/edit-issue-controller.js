@@ -21,12 +21,10 @@ angular.module('issueTrackingSystem.edit-issue', [
         function ($scope, $rootScope, $location, $routeParams, issue, project, identity, usersService) {
             issue.getIssueById($routeParams.id)
                 .then(function (issue) {
-                    $scope.issue = issue.data;                    
-                    $rootScope.isLead = false;
-                    $rootScope.isAssignee = false;
+                    $scope.issue = issue.data;
 
                     identity.getCurrentUser()
-                   .then(function (user) {                       
+                   .then(function (user) {
                        if (user.Id === issue.data.Author.Id) {
                            $scope.isLead = true;
                        }
@@ -43,8 +41,8 @@ angular.module('issueTrackingSystem.edit-issue', [
                     project.getProjectById(issue.data.Project.Id)
                         .then(function (response) {
                             $scope.avilablePriorities = response.data.Priorities;                          
-                        });                   
-                   
+                        });
+
                 });
 
             $scope.today = function () {

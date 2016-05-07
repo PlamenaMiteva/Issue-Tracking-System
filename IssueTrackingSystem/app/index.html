@@ -32,12 +32,12 @@
             </div>
 
             <div class="collapse navbar-collapse" id="home-navbar-2">
-                <ul class="nav navbar-nav" id="home-navbar-ul" ng-show="auth==true" ng-controller="HomeCtrl">
-                    <li id="home-li"><a href="#/"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+                <ul class="nav navbar-nav" id="home-navbar-ul" ng-controller="HomeCtrl">
+                    <li id="home-li"  ng-show="auth==true"><a href="#/"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
                     <li id="projects-li" ng-show="isAdmin"><a href="#/projects"><span class="glyphicon glyphicon-list-alt"></span> Projects</a></li>
                     <li id="create-project-li" ng-show="isAdmin"><a href="#/projects/add"><span class="glyphicon glyphicon-file"></span> Create</a></li>
-                    <li id="logout-li"><a ng-click="logout()"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
-                    <li id="change-password-li"><a href="#/profile/password"><span class="glyphicon glyphicon-refresh"></span> Change Password</a></li>
+                    <li id="logout-li" ng-show="auth==true"><a ng-click="logout()"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+                    <li id="change-password-li" ng-show="auth==true"><a href="#/profile/password"><span class="glyphicon glyphicon-refresh"></span> Change Password</a></li>
                 </ul>
             </div>
         </div>
@@ -55,7 +55,16 @@
     </div>
             <div class="container-fluid">
             <div ng-view></div>
-        </div>
+                <div class="push"></div>
+           </div>
+<div class="footer navbar-fixed-bottom">
+<footer class="container-fluid">
+    <div class="text-center">
+    <h4 class="pull-left">Issue Tracking System<sup>&copy;</sup>.</h4>
+    <h4 class="pull-right">Created by <a href="https://github.com/PlamenaMiteva/Issue-Tracking-System" rel="author">Plamena Miteva</a></h4>
+    </div>
+</footer>
+    </div>
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>

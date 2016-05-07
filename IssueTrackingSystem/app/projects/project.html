@@ -25,8 +25,8 @@
                         <b><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Priorities: </b><span ng-repeat="priority in project.Priorities">{{priority.Name}}{{$last ? '' : ', '}}</span>
                     </li>
                 </ul>
-                <a href="#/projects/{{project.Id}}/edit"><button class="btn btn-primary" ng-if="isLead"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit Project</button></a>
-                <a href="#/projects/{{project.Id}}/add-issue"><button class="btn btn-primary" ng-if="isLead">Add Issue</button></a>
+                <a href="#/projects/{{project.Id}}/edit"><button class="btn btn-primary" ng-show="isLead||isAdmin"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit Project</button></a>
+                <a href="#/projects/{{project.Id}}/add-issue"><button class="btn btn-primary" ng-show="isLead||isAdmin">Add Issue</button></a>
             </div>
         </div>
     </div>
@@ -61,23 +61,24 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <td>Issue</td>
-                    <td>Description</td>
-                    <td>Due Date</td>
-                    <td>Assignee</td>
+                    <td class="col-md-1">Issue</td>
+                    <td class="col-md-3">Description</td>
+                    <td class="col-md-1">Due Date</td>
+                    <td class="col-md-1">Assignee</td>
                 </tr>
             </thead>
             <tbody ng-repeat="issue in issues | orderBy:'-DueDate'" ng-controller='ProjectCtrl'>
                 <tr>
-                    <td><a ng-href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
-                    <td>{{issue.Description}}</td>
-                    <td>{{issue.DueDate| date:'dd/MM/yyyy'}}</td>
-                    <td>{{issue.Assignee.Username}}</td>
+                    <td class="col-md-1"><a ng-href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
+                    <td class="col-md-3">{{issue.Description}}</td>
+                    <td class="col-md-1">{{issue.DueDate| date:'dd/MM/yyyy'}}</td>
+                    <td class="col-md-1">{{issue.Assignee.Username}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 
 <script>
     $(document).ready(function () {
@@ -86,35 +87,3 @@
         });
     });
 </script>
-
-
-<!--<div class="form-group">
-    <label for="filterParametar"><span class="glyphicon glyphicon-filter"></span> Filter</label>
-    <select class="form-control" id="parametar" name="parametar" ng-model="filter.parametar" required="required">
-        <option value="Title">Title</option>
-        <option value="DueDate">DueDate</option>
-        <option value="DueDate.Day">DueDate.Day</option>
-        <option value="DueDate.Month">DueDate.Month</option>
-        <option value="DueDate.Year">DueDate.Year</option>
-    </select>
-</div>-->
-<!--<div class="form-group" ng-show="filter.parametar=='DueDate.Month'">
-    <label for="startMonth"><span class="glyphicon glyphicon-calendar"></span> Start Month</label>
-    <select class="form-control" id="startMonth" name="startMonth" ng-model="filter.startMonth">
-        <option ng-repeat="month in months" value="{{months.indexOf(month)+ 1}}">
-            {{month}}
-        </option>
-    </select>
-</div>
-<div class="form-group" ng-show="filter.parametar=='DueDate.Month'">
-    <label for="endMonth"><span class="glyphicon glyphicon-calendar"></span> End Month</label>
-    <select class="form-control" id="endMonth" name="endMonth" ng-model="filter.endMonth">
-        <option ng-repeat="month in months" value="{{months.indexOf(month)+ 1}}">
-            {{month}}
-        </option>
-    </select>
-</div>
-<div class="form-group" ng-show="filter.parametar=='Title'">
-    <label for="value"><span class="glyphicon glyphicon-asterisk"></span> Value</label>
-    <input type="text" class="form-control" id="value" required="required" ng-model="filter.value">
-</div>-->

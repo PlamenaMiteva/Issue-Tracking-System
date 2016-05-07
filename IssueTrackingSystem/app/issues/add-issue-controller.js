@@ -18,8 +18,7 @@ angular.module('issueTrackingSystem.add-issue', [
         'project',
         'usersService',
         'label',        
-        function ($scope, $location, $routeParams, identity, issue, project, usersService, label) {
-            $scope.isLead = false;
+        function ($scope, $location, $routeParams, identity, issue, project, usersService, label) {            
 
             project.getProjectById($routeParams.id)
                .then(function (project) {

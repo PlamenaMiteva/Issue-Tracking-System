@@ -2,34 +2,34 @@
     <div class="jumbotron">
         <h1 id="edit-issue-details">Edit Issue Details</h1>
     </div>
-        <div class="col-sm-9 col-md-6 col-lg-8" ng-if="isLead">
+        <div class="col-sm-9 col-md-6 col-lg-8" ng-if="isLead||isAdmin">
             <div class="panel panel-primary">
                 <div class="panel-heading" id="issue-panel">
-                    <h3 class="panel-title">{{issue.IssueKey}}</h3>
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;{{issue.IssueKey}}</h3>
                 </div>
                 <div class="panel-body">
                         <form name="editIssueForm">
-                            <label for="issue-title">Title</label>
+                            <label for="issue-title"><span class="glyphicon glyphicon-pushpin"></span>&nbsp;&nbsp;Title</label>
                             <input type="text" name = "issueTitle" id="issue-title" required="required" ng-model="newIssue.Title" placeholder ="{{issue.Title}}" class="form-control" />
                             <br />
-                            <label for="issue-description">Description</label>
+                            <label for="issue-description"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Description</label>
                             <input type="text" name = "issueDescription" id="issue-description" required="required" ng-model="newIssue.Description" placeholder ="{{issue.Description}}" class="form-control" />
                             <br />
-                            <label for="issue-assignee">Assignee</label>
+                            <label for="issue-assignee"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Assignee</label>
                             <select class="form-control" id="issue-assignee" name="issue-assignee" ng-model="newIssue.AssigneeId" required>
                             <option ng-repeat="user in users" value="{{user.Id}}">
                                 {{user.Username}}
                             </option>
                             </select>
                             <br />
-                            <label for="priority">Priority</label>
+                            <label for="priority"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Priority</label>
                             <select class="form-control" id="priority" name="priority" ng-model="newIssue.PriorityId" required>
                                 <option ng-repeat="priority in avilablePriorities" value="{{priority.Id}}">
                                     {{priority.Name}}
                                 </option>
                             </select>
                             <br />
-                            <label for="issue-date">Due Date</label>
+                            <label><span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;Due Date</label>
                             <pre><b>Selected Issue Deadline is: </b><em>{{dt | date:'fullDate' }}</em></pre>
                             <div>
                                 <p class="input-group">
@@ -41,7 +41,7 @@
                             </div>
                             <br />
                             <div ng-if="issue.Labels.length > 0">
-                            <label for="labels">Labels</label>
+                            <label for="labels"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;Labels</label>
                                 <div id="labels" ng-repeat="label in issue.Labels">
                                    <input type="text" ng-model="label.Name" class="form-control" placeholder ={{label.Name}} />
                                 </div>
@@ -49,30 +49,30 @@
                             <br>
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <b>Author: </b>{{issue.Author.Username}}
+                                    <b><span class="glyphicon glyphicon-king"></span>&nbsp;&nbsp;Author: </b>{{issue.Author.Username}}
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Project: </b>{{issue.Project.Name}}
+                                    <b><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Project: </b>{{issue.Project.Name}}
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Status: </b>{{issue.Status.Name}}
+                                    <b><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;Status: </b>{{issue.Status.Name}}
                                 </li>
                             </ul>
-                            <button class="btn btn-primary" id="edit-issue-btn" ng-disabled="editIssueForm.$invalid" ng-click="editIssue(issue.Id, newIssue, issue.Labels)">EDIT</button>
+                            <button class="btn btn-primary" id="edit-issue-btn" ng-disabled="editIssueForm.$invalid" ng-click="editIssue(issue.Id, newIssue, issue.Labels)"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;EDIT</button>
                         </form>
                 </div>
             </div>
         </div>
-        <div class="col-sm-3 col-md-6 col-lg-4" ng-if="isAssignee && issue.Status.Id != 1">
+        <div class="col-sm-3 col-md-6 col-lg-4" ng-if="issue.Status.Id != 1">
             <div class="panel panel-primary">
                 <div class="panel-heading" id="status-panel">
-                    <h3 class="panel-title">Available Statuses</h3>
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Available Statuses</h3>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group" ng-repeat="status in issue.AvailableStatuses">
                         <li class="list-group-item clearfix">
                             -----{{status.Name}}
-                            <button class="btn btn-primary btn pull-right"  ng-click="changeStatus(issue.Id, status)">Change</button>
+                            <button class="btn btn-primary btn pull-right"  ng-click="changeStatus(issue.Id, status)"><span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;Change</button>
                         </li>
                     </ul>
                 </div>

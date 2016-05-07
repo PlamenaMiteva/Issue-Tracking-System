@@ -7,9 +7,24 @@ angular.module('issueTrackingSystem.comments', [
         '$scope',
         '$routeParams',
         'comment',
-        function ($scope, $routeParams, comment) {           
+        'identity',
+        'issue',
+        function ($scope, $routeParams, comment, identity, issue) {
             $scope.isCollapsed = false;
-            
+
+            issue.getIssueById($routeParams.id)
+                .then(function (issue) {
+                    identity.getCurrentUser()
+                        .then(function (user) {
+                            if (user.Id === issue.data.Author.Id) {
+                                $scope.isLead = true;
+                            }
+                            if (user.Id === issue.data.Assignee.Id) {
+                                $scope.isAssignee = true;
+                            }
+                        });
+                });
+
                     comment.getIssueComments($routeParams.id)
                         .then(function (comments) {
                             $scope.comments = comments.data;

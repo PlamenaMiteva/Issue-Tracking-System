@@ -69,7 +69,7 @@ a, a:hover, a:active{
 
 }
 
-#login-btn, #register-btn, #add-issue-btn, #profile-btn, #comments-btn, #edit-issue-btn, #add-comment-btn{
+#login-btn, #register-btn, #add-issue-btn, #profile-btn, #comments-btn, #edit-issue-btn, #add-comment-btn, #change-status-btn{
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -178,6 +178,28 @@ thead{
   background-color: #3599b7;
   border-color: #3599b7;
   color:white;  
+}
+
+footer {
+    padding: 0 10px 0 10px;
+    border-top: 1px solid #eee;
+    color: white;
+    background-color: darkgray;
+}
+footer > p {
+    margin-bottom: 11px;
+    margin-top: 13px;
+}
+.push {
+    height: 63px;
+}
+
+table {
+    table-layout: fixed;
+}
+
+table th, table td {
+    overflow: hidden;
 }
 
 

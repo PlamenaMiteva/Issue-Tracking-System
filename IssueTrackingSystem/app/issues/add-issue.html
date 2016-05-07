@@ -2,7 +2,7 @@
     <div class="jumbotron">
         <h1 id="add-issue-details">Add Issue To Project</h1>
     </div>
-    <div class="col-sm-9 col-md-6 col-lg-8" ng-if="isLead">
+    <div class="col-sm-9 col-md-6 col-lg-8" ng-if="isLead||isAdmin">
         <div class="panel panel-primary">
             <div class="panel-heading" id="add-issue-panel">
                 <h3 class="panel-title">Project Name: <b>{{project.Name}}</b></h3>
@@ -29,7 +29,7 @@
                         </option>
                     </select>
                     <br />
-                    <label for="issue-date">Due Date</label>
+                    <label>Due Date</label>
                     <pre><b>Selected Project Deadline is: </b><em>{{dt | date:'fullDate' }}</em></pre>
                     <div>
                         <p class="input-group">
@@ -44,7 +44,7 @@
                         <pre><b>Project Labels: </b><em><span ng-repeat="label in project.Labels">{{label.Name}}{{$last ? '' : ', '}}</span></em></pre>
                     </div>
                     <br />
-                    <label for="issue-label">Labels</label>
+                    <label>Labels</label>
                     <input type="text" ng-model="asyncSelected" uib-typeahead="label as label.name for label in getAllLabels($viewValue)" class="form-control">
                     <button class="btn btn-primary" id="add-label-btn" ng-click="addLabel(project.Labels, asyncSelected.name)">Add Label</button>
                     <br />

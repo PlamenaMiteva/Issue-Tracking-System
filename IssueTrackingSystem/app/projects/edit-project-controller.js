@@ -17,15 +17,7 @@ angular.module('issueTrackingSystem.edit-project', [
         'project',
         'usersService',
         function ($scope, $location, $routeParams, identity, project, usersService) {
-            $scope.isAdmin = false;
-
-            identity.getCurrentUser()
-                .then(function (user) {
-                    if (user.isAdmin) {
-                        $scope.isAdmin = true;
-                    }
-                });
-
+            
             project.getProjectById($routeParams.id)
                 .then(function (project) {
                     $scope.project = project.data;

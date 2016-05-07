@@ -11,8 +11,6 @@ angular.module('issueTrackingSystem.projects', [
         'project',
         'issue',
         function ($scope, $rootScope, $routeParams, identity, project, issue) {
-            $scope.isLead = false;
-            $scope.isAdmin = false;
             $scope.pageNumber = 1;
             $scope.pageSize = 10;
             $scope.pageArray = [];
@@ -43,34 +41,29 @@ angular.module('issueTrackingSystem.projects', [
                    title: 'Status',
                    templateUrl: 'projects/partials/status-filter.html'
                }
-            ];
-
-            identity.getCurrentUser()
-                .then(function (user) {
-                    $scope.currentUserId = user.Id;
-                    if (user.isAdmin) {
-                        $scope.isAdmin = true;
-                    }
-                });
+            ];           
 
             project.getProjectById($routeParams.id)
                 .then(function (project) {
-                    $scope.project = project.data;                   
-                    var currentUser = identity.requestUserProfile();
-                    if ($scope.currentUserId === project.data.Lead.Id) {
-                        $scope.isLead = true;
-                    }
+                    $scope.project = project.data;
+                    identity.getCurrentUser()
+                        .then(function (user) {
+                            var currentUserId = user.Id;
+                            if (currentUserId  === $scope.project.Lead.Id) {
+                                $scope.isLead = true;
+                            }
+                        });
                 });
 
             project.getProjectIssues($routeParams.id)
                 .then(function (issues) {
-                    $scope.issues = issues.data;                   
+                    $scope.issues = issues.data;                    
                 });
 
             $scope.addFilter = function addFilter(filter) {
                 var key = Object.keys(filter);
-                if (key=='day') {
-                    key = "DueDate.Day";                    
+                if (key == 'day') {
+                    key = "DueDate.Day";
                 }
                 if (key == 'month') {
                     key = "DueDate.Month";
@@ -78,11 +71,36 @@ angular.module('issueTrackingSystem.projects', [
                 if (key == 'year') {
                     key = "DueDate.Year";
                 }
-                if (Object.keys(filter) == "statusName" || Object.keys(filter) == "priorityName" || Object.keys(filter) == "projectName" || Object.keys(filter) == "authorUsername" || Object.keys(filter) == "authorisAdmin" || Object.keys(filter) == "assigneeUsername" || Object.keys(filter) == "assigneeisAdmin" || Object.keys(filter) == "title" || Object.keys(filter) == "description" || Object.keys(filter) == "issueKey") {
+                if (key == 'projectName') {
+                    key = "Project.Name";
+                }
+                if (key == 'priorityName') {
+                    key = "Priority.Name";
+                }
+                if (key == 'statusName') {
+                    key = "Status.Name";
+                }
+                if (key == 'authorUsername') {
+                    key = "Author.Username";
+                }
+                if (key == 'authorisAdmin') {
+                    key = "Author.isAdmin";
+                }
+                if (key == 'assigneeUsername') {
+                    key = "Assignee.Username";
+                }
+                if (key == 'assigneeisAdmin') {
+                    key = "Assignee.isAdmin";
+                }
+
+                if (Object.keys(filter) == "statusName" || Object.keys(filter) == "priorityName" || Object.keys(filter) == "projectName" || Object.keys(filter) == "authorUsername" || Object.keys(filter) == "assigneeUsername" || Object.keys(filter) == "title" || Object.keys(filter) == "description" || Object.keys(filter) == "issueKey") {
+                    $rootScope.result += key + '=="' + filter[Object.keys(filter)] + '"&&';
+                } else if (Object.keys(filter) == "authorisAdmin" || Object.keys(filter) == "assigneeisAdmin") {
                     $rootScope.result += key + '==' + filter[Object.keys(filter)] + '&&';
-                } else {
+                }else {
                     $rootScope.result += key + filter[Object.keys(filter)] + '&&';
                 }
+                $scope.filter={};
                 console.log($rootScope.result);
             };
 
@@ -97,11 +115,35 @@ angular.module('issueTrackingSystem.projects', [
                 if (key == 'year') {
                     key = "DueDate.Year";
                 }
-                if (Object.keys(filter) == "statusName" || Object.keys(filter) == "priorityName" || Object.keys(filter) == "projectName" || Object.keys(filter) == "authorUsername" || Object.keys(filter) == "authorisAdmin" || Object.keys(filter) == "assigneeUsername" || Object.keys(filter) == "assigneeisAdmin" || Object.keys(filter) == "title" || Object.keys(filter) == "description" || Object.keys(filter) == "issueKey") {
+                if (key == 'projectName') {
+                    key = "Project.Name";
+                }
+                if (key == 'priorityName') {
+                    key = "Priority.Name";
+                }
+                if (key == 'statusName') {
+                    key = "Status.Name";
+                }
+                if (key == 'authorUsername') {
+                    key = "Author.Username";
+                }
+                if (key == 'authorisAdmin') {
+                    key = "Author.isAdmin";
+                }
+                if (key == 'assigneeUsername') {
+                    key = "Assignee.Username";
+                }
+                if (key == 'assigneeisAdmin') {
+                    key = "Assignee.isAdmin";
+                }
+                if (Object.keys(filter) == "statusName" || Object.keys(filter) == "priorityName" || Object.keys(filter) == "projectName" || Object.keys(filter) == "authorUsername" || Object.keys(filter) == "assigneeUsername" || Object.keys(filter) == "title" || Object.keys(filter) == "description" || Object.keys(filter) == "issueKey") {
+                    $rootScope.result += key + '=="' + filter[Object.keys(filter)] + '"||';
+                } else if (Object.keys(filter) == "authorisAdmin" || Object.keys(filter) == "assigneeisAdmin") {
                     $rootScope.result += key + '==' + filter[Object.keys(filter)] + '||';
                 } else {
                     $rootScope.result += key + filter[Object.keys(filter)] + '||';
-                }                
+                }
+                $scope.filter={};
                 console.log($rootScope.result);
             }; 
 
@@ -116,25 +158,46 @@ angular.module('issueTrackingSystem.projects', [
                 if (key == 'year') {
                     key = "DueDate.Year";
                 }
-                if (Object.keys(filter) == "statusName" || Object.keys(filter) == "priorityName" || Object.keys(filter) == "projectName" || Object.keys(filter) == "authorUsername" || Object.keys(filter) == "authorisAdmin" || Object.keys(filter) == "assigneeUsername" || Object.keys(filter) == "assigneeisAdmin" || Object.keys(filter) == "title" || Object.keys(filter) == "description" || Object.keys(filter) == "issueKey") {
+                if (key == 'projectName') {
+                    key = "Project.Name";
+                }
+                if (key == 'priorityName') {
+                    key = "Priority.Name";
+                }
+                if (key == 'statusName') {
+                    key = "Status.Name";
+                }
+                if (key == 'authorUsername') {
+                    key = "Author.Username";
+                }
+                if (key == 'authorisAdmin') {
+                    key = "Author.isAdmin";
+                }
+                if (key == 'assigneeUsername') {
+                    key = "Assignee.Username";
+                }
+                if (key == 'assigneeisAdmin') {
+                    key = "Assignee.isAdmin";
+                }
+                if (Object.keys(filter) == "statusName" || Object.keys(filter) == "priorityName" || Object.keys(filter) == "projectName" || Object.keys(filter) == "authorUsername" || Object.keys(filter) == "assigneeUsername" || Object.keys(filter) == "title" || Object.keys(filter) == "description" || Object.keys(filter) == "issueKey") {
+                    $rootScope.result += key + '=="' + filter[Object.keys(filter)] +'"';
+                } else if (Object.keys(filter) == "authorisAdmin" || Object.keys(filter) == "assigneeisAdmin") {
                     $rootScope.result += key + '==' + filter[Object.keys(filter)];
-                } else {
+                }else {
                     $rootScope.result += key + filter[Object.keys(filter)];
                 }
+                $scope.filter={};
                 console.log($rootScope.result);
             }; 
 
             $scope.getFilteredIssues = function getFilteredIssues() {
                 issue.getFilteredIssues($scope.pageSize, $scope.pageNumber, $rootScope.result)
-               .then(function (issues) {
-                   console.log(issues.data);
-                   $scope.totalPages = issues.data.TotalPages;
-                   $scope.issues = issues.data.Issues;
-                   $scope.pages = issues.data.TotalPages;
-                   for (var i = 1; i <= $scope.pages; i++) {
-                       $scope.pageArray.push(i);
-                   }
+               .then(function (result) {
+                   $scope.totalPages = result.data.TotalPages;
+                   issue.getFilteredIssues($scope.pageSize*$scope.totalPages, 1,  $rootScope.result)
+                       .then(function (issues) {
+                           $scope.issues = issues.data.Issues;
+                       });
                });
-                console.log($rootScope.result);
             }
         }]);

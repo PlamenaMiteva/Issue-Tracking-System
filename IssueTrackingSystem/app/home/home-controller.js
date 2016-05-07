@@ -16,14 +16,11 @@ angular.module('issueTrackingSystem.home', ['ngRoute', 'ui.bootstrap', 'issueTra
         'authentication',
         'identity',
         function ($rootScope, $scope, $location, $uibModal, authentication, identity) {
-            $rootScope.auth = authentication.isAuthenticated();
-            $scope.isAdmin = false;
+            $rootScope.auth =  authentication.isAuthenticated();
 
-            identity.getCurrentUser()
+                identity.getCurrentUser()
                 .then(function (user) {
-                    if (user.isAdmin) {
-                        $scope.isAdmin = true;
-                    }
+                    $rootScope.isAdmin = user.isAdmin;
                 });
 
             $scope.login = function (user) {                

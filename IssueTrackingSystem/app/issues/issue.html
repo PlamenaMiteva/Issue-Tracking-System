@@ -37,21 +37,25 @@
                         <b><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;Labels: </b><span ng-repeat="label in issue.Labels">{{label.Name}}{{$last ? '' : ', '}}</span>
                     </li>
                 </ul>
-                <a href="#/issues/{{issue.Id}}/edit"><button class="btn btn-primary" id="edit-issue-btn"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;EDIT ISSUE</button></a>
+                <a href="#/issues/{{issue.Id}}/edit"><button class="btn btn-primary" id="edit-issue-btn" ng-show="isLead||isAdmin"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;EDIT ISSUE</button></a>
+                <a href="#/issues/{{issue.Id}}/edit"><button class="btn btn-primary" id="change-status-btn" ng-show="isAssignee&&!isAdmin&&!isLead"><span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;CHANGE STATUS</button></a>
                 <div ng-controller="CommentCtrl">
                     <div>
                         <button type="button" id="comments-btn" class="btn btn-primary" ng-click="isCollapsed = !isCollapsed"><span class="glyphicon glyphicon-menu-hamburger"></span>&nbsp;&nbsp;SHOW COMMENTS</button>
                     </div>
                     <div uib-collapse="isCollapsed">
+                        <div class="panel-body" ng-if="comments.length==0">
+                            No comments
+                        </div>
                         <div class="panel panel-primary" ng-repeat="comment in comments | orderBy:'-CreatedOn'">
                             <div class="panel-heading" id="comment-panel">
                                 <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> {{comment.Author.Username}} created on {{comment.CreatedOn | date:'dd MMMM yyyy'}}</h3>
                             </div>
                             <div class="panel-body">
-                                {{comment.Text}}
+                            {{comment.Text}}
                             </div>
                         </div>
-                        <form role="form" name="addCommentForm">
+                        <form role="form" name="addCommentForm" ng-show="isLead||isAssignee">
                             <div class="form-group">                               
                                 <input type="text" class="form-control" id="commentText" placeholder="leave your comment here..." required="required" ng-model="newComment.Text">
                             </div>

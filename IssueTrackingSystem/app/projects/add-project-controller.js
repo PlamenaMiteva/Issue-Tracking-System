@@ -16,22 +16,13 @@ angular.module('issueTrackingSystem.addProject', [
             $scope.project = {};
             $scope.project.Labels = [];
             $scope.project.Priorities = [];
-            $scope.isAdmin = false;
-
-            identity.getCurrentUser()
-                .then(function (user) {
-                    if (user.isAdmin) {
-                        $scope.isAdmin = true;
-                    }
-                });
 
             usersService.getAllUsers()
                .then(function (response) {
                  $scope.users = response.data;
             });
 
-            $scope.getAllLabels = function (val) {               
-                console.log(val);
+            $scope.getAllLabels = function (val) { 
                 return label.getLabels(val);
             }
 
