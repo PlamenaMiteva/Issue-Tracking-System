@@ -76,6 +76,13 @@
                 </tr>
             </tbody>
         </table>
+        <div class="text-center">
+            <ul class="pagination pagination-sm" ng-if="issues.length > 0">
+                <li><a href="" ng-click='previousPage()'><<</a></li>
+                <li ng-repeat="page in pageArray"><a href="" ng-click='getCurrentPage(page)'>{{page}}</a></li>
+                <li><a href="" ng-click='nextPage()'>>></a></li>
+            </ul>
+        </div>
     </div>
 </div>
 

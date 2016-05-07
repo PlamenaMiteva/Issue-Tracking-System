@@ -13,6 +13,8 @@ angular.module('issueTrackingSystem.projects', [
         function ($scope, $rootScope, $routeParams, identity, project, issue) {
             $scope.pageNumber = 1;
             $scope.pageSize = 10;
+            $scope.start = 0;
+            $scope.end = 10;
             $scope.pageArray = [];
             $rootScope.result='';            
             //$scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -56,8 +58,13 @@ angular.module('issueTrackingSystem.projects', [
                 });
 
             project.getProjectIssues($routeParams.id)
-                .then(function (issues) {
-                    $scope.issues = issues.data;                    
+                .then(function (result) {
+                    $scope.result = result.data;
+                    $scope.issues = $scope.result.slice($scope.start, $scope.end);
+                    $scope.totalPages = Math.ceil($scope.result.length / $scope.pageSize);
+                    for (var i = 1; i <= $scope.totalPages; i++) {
+                        $scope.pageArray.push(i);
+                    }
                 });
 
             $scope.addFilter = function addFilter(filter) {
@@ -192,12 +199,42 @@ angular.module('issueTrackingSystem.projects', [
 
             $scope.getFilteredIssues = function getFilteredIssues() {
                 issue.getFilteredIssues($scope.pageSize, $scope.pageNumber, $rootScope.result)
-               .then(function (result) {
-                   $scope.totalPages = result.data.TotalPages;
-                   issue.getFilteredIssues($scope.pageSize*$scope.totalPages, 1,  $rootScope.result)
-                       .then(function (issues) {
-                           $scope.issues = issues.data.Issues;
+               .then(function (response) {
+                   $scope.totalPages = response.data.TotalPages;
+                   issue.getFilteredIssues($scope.pageSize*$scope.totalPages, $scope.pageNumber,  $rootScope.result)
+                       .then(function (result) {
+                           $scope.result = result.data.Issues;
+                           $scope.issues = $scope.result.slice($scope.start, $scope.end);
+                           $scope.pageArray=[];
+                           for (var i = 1; i <= $scope.totalPages; i++) {
+                               $scope.pageArray.push(i);
+                           }
                        });
                });
             }
+
+            $scope.nextPage = function () {
+                if ($scope.pageNumber < $scope.totalPages) {
+                    $scope.pageNumber++;
+                    $scope.start += $scope.pageSize;
+                    $scope.end += $scope.pageSize;
+                    $scope.issues = $scope.result.slice($scope.start, $scope.end);
+                }
+            };
+
+            $scope.getCurrentPage = function (page) {
+                $scope.pageNumber = page;
+                $scope.start = ((page - 1) * $scope.pageSize);
+                $scope.end = page * $scope.pageSize;
+                $scope.issues = $scope.result.slice($scope.start, $scope.end);
+            };
+
+            $scope.previousPage = function () {
+                if ($scope.pageNumber > 1) {
+                    $scope.pageNumber--;
+                    $scope.start -= $scope.pageSize;
+                    $scope.end -= $scope.pageSize;
+                    $scope.issues = $scope.result.slice($scope.start, $scope.end);
+                }
+            };
         }]);

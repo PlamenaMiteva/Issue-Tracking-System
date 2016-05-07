@@ -104,7 +104,6 @@ angular.module('issueTrackingSystem.board', [
                 $scope.start = ((page - 1) * $scope.projectPageSize);
                 $scope.end = page * $scope.projectPageSize;
                 $scope.projects = $scope.myProjects.slice($scope.start, $scope.end);
-                console.log($scope.projects);
             };
 
             $scope.projectPreviousPage = function () {
