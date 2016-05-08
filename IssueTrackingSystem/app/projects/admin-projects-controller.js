@@ -6,7 +6,10 @@ angular.module('issueTrackingSystem.adminProjects', [
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/projects', {
             templateUrl: 'projects/allProjects.html',
-            controller: 'adminProjectsCtrl'
+            controller: 'adminProjectsCtrl',
+            access: {
+                requiresAdmin: true
+            }
         })
     }])
     .controller('adminProjectsCtrl', [

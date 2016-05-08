@@ -32,18 +32,24 @@ angular.module('issueTrackingSystem', [
         $routeProvider.when('/projects', {
             templateUrl: 'projects/allProjects.html',
             controller: 'adminProjectsCtrl',
-            isAdmin: 'true'
+            access: {
+                requiresAdmin: true
+            }
         });
-
+        
         $routeProvider.when('/projects/add', {
             templateUrl: 'projects/add-project.html',
             controller: 'AddProjectCtrl',
-            isAdmin: 'true'
+            access: {
+                requiresAdmin: true
+            }
         });
 
         $routeProvider.when('/projects/:id', {
             templateUrl: 'projects/project.html',
-            controller: 'ProjectCtrl'
+            controller: 'ProjectCtrl',
+            access: {
+                requiresLogin: true            }
         });
 
       $routeProvider.otherwise({redirectTo: '/'});
@@ -67,14 +73,24 @@ angular.module('issueTrackingSystem', [
             }]);
 
     }])
-    .run(['$rootScope', '$location', 'authentication', function($rootScope, $location, authentication) {
-            $rootScope.$on('$routeChangeError', function(ev, current, previous, rejection) {
-                    if (rejection == 'Unauthorized Access') {
-                            $location.path('/');
+    .run([
+        '$rootScope',
+        '$location',
+        'authentication',
+        function ($rootScope, $location, authentication) {
+            $rootScope.$on('$routeChangeStart', function (event, nextRoute) {
+                if (nextRoute.access) {
+                    if (nextRoute.access.requiresLogin && !authentication.isAuthenticated()) {
+                        $location.path('/');
                     }
-            });
 
-            authentication.refreshCookie();            
-    }])    
+                    if (nextRoute.access.requiresAdmin && !authentication.isAdmin()) {
+                        $location.path('/');
+                    }
+                } else {
+                    $location.path('/');
+                }
+            });
+        }])
     .constant('toastr', toastr)
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');

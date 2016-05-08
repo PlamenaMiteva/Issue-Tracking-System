@@ -8,16 +8,17 @@ angular.module('issueTrackingSystem.projects', [
         '$rootScope',
         '$routeParams',
         'identity',
+        'authentication',
         'project',
         'issue',
-        function ($scope, $rootScope, $routeParams, identity, project, issue) {
+        function ($scope, $rootScope, $routeParams, identity, authentication, project, issue) {
             $scope.pageNumber = 1;
             $scope.pageSize = 10;
             $scope.start = 0;
             $scope.end = 10;
             $scope.pageArray = [];
-            $rootScope.result='';            
-            //$scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            $rootScope.result='';
+
             $scope.groups = [
                {
                    title: 'Issue',
@@ -43,7 +44,8 @@ angular.module('issueTrackingSystem.projects', [
                    title: 'Status',
                    templateUrl: 'projects/partials/status-filter.html'
                }
-            ];           
+            ];
+
 
             project.getProjectById($routeParams.id)
                 .then(function (project) {

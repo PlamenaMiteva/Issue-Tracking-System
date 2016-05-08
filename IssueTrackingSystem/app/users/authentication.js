@@ -23,9 +23,11 @@ angular.module('issueTrackingSystem.users.authentication', [])
                         .then(function (response) {
                             preserveUserData(response.data);
 
+
+
                             identity.requestUserProfile()
                                 .then(function() {
-                                    deferred.resolve(response.data);
+                                    deferred.resolve(response.data);                                    
                                 });
                         });
 
