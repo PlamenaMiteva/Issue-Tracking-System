@@ -17,7 +17,7 @@ angular.module('issueTrackingSystem.projects', [
             $scope.start = 0;
             $scope.end = 10;
             $scope.pageArray = [];
-            $rootScope.result='';
+            $rootScope.result = '';           
 
             $scope.groups = [
                {

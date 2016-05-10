@@ -5,31 +5,31 @@
     <div class="col-sm-9 col-md-6 col-lg-8">
         <div class="panel panel-primary">
             <div class="panel-heading" id="issue-panel">
-                <h3 class="panel-title">{{project.ProjectKey}}</h3>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-lock"></span>  {{project.ProjectKey}}</h3>
             </div>
             <div class="panel-body">
                 <form name="editProjectForm">
-                    <label for="project-name">Title</label>
+                    <label for="project-name"><span class="glyphicon glyphicon-list-alt"></span>  Title</label>
                     <input type="text" name = "project-name" id="project-name" required="required" ng-model="newProject.Name" placeholder ="{{project.Name}}" class="form-control" />
                     <br />
-                    <label for="project-description">Description</label>
+                    <label for="project-description"><span class="glyphicon glyphicon-pencil"></span> Project Description</label>
                     <input type="text" name = "project-description" id="project-description" required="required" ng-model="newProject.Description" placeholder ="{{project.Description}}" class="form-control" />
                     <br />
-                    <label for="project-lead" ng-if="isAdmin">Project Manager</label>
+                    <label for="project-lead" ng-if="isAdmin"><span class="glyphicon glyphicon-user"></span> Project Manager</label>
                     <select class="form-control" id="project-lead" name="project-lead" ng-if="isAdmin"  ng-model="newProject.LeadId" required>
                         <option ng-repeat="user in users" value="{{user.Id}}">
                             {{user.Username}}
                         </option>
                     </select>
                     <br />
-                    <label for="project-priority">Project Priorities</label>
+                    <label for="project-priority"><span class="glyphicon glyphicon-circle-arrow-up"></span>  Project Priorities</label>
                     <div id="project-priority" ng-repeat="priority in project.Priorities">
                         <input type="text" ng-model="priority.Name" class="form-control" placeholder={{priority.Name}} />
                         <br>
                     </div>
                     <br />
                     <div ng-if="project.Labels.length > 0">
-                        <label for="labels">Labels</label>
+                        <label for="labels"><span class="glyphicon glyphicon-tags"></span> Labels</label>
                         <div id="labels" ng-repeat="label in project.Labels">
                             <input type="text" ng-model="label.Name" class="form-control" placeholder ={{label.Name}} />
                             <br>

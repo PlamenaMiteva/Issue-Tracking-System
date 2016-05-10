@@ -28,69 +28,56 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.label',
         'issueTrackingSystem.common.modal',
 ])
-    .config(['$routeProvider', '$httpProvider', '$stateProvider', '$urlRouterProvider', function ($routeProvider, $httpProvider, $stateProvider, $urlRouterProvider) {
-        $routeProvider.when('/projects', {
-            templateUrl: 'projects/allProjects.html',
-            controller: 'adminProjectsCtrl',
-            access: {
-                requiresAdmin: true
-            }
-        });
-        
+    .config(['$routeProvider', '$httpProvider', '$stateProvider', '$urlRouterProvider', function ($routeProvider, $httpProvider, $stateProvider, $urlRouterProvider) { 
         $routeProvider.when('/projects/add', {
             templateUrl: 'projects/add-project.html',
             controller: 'AddProjectCtrl',
-            access: {
-                requiresAdmin: true
+            resolve: {
+                'auth': function (authentication) {
+                    return authentication.isAdmin();
+                }
             }
         });
 
         $routeProvider.when('/projects/:id', {
             templateUrl: 'projects/project.html',
             controller: 'ProjectCtrl',
-            access: {
-                requiresLogin: true            }
+            resolve: {
+                'auth': function (authentication) {                    
+                    return authentication.isLoggedIn();
+                }
+            }
         });
 
-      $routeProvider.otherwise({redirectTo: '/'});
+        $routeProvider.otherwise({ redirectTo: '/' });
 
-      $httpProvider.interceptors.push(['$q','toastr', function($q, toastr) {
-                    return {
-                            'responseError': function(rejection) {
-                                    if (rejection.data && rejection.data['error_description']) {
-                                            toastr.error(rejection.data['error_description']);
-                                    }
-                                    else if (rejection.data && rejection.data.modelState && rejection.data.modelState['']){
-                                            var errors = rejection.data.modelState[''];
-                                            if (errors.length > 0) {
-                                                    toastr.error(errors[0]);
-                                            }
-                                    }
-
-                                    return $q.reject(rejection);
-                            }
+        $httpProvider.interceptors.push(['$q', 'toastr', function ($q, toastr) {
+            return {
+                'responseError': function (rejection) {                    
+                    if (rejection.data && rejection.data['error_description']) {
+                        toastr.error(rejection.data['error_description']);
                     }
-            }]);
+                    else if (rejection.data && rejection.data.modelState && rejection.data.modelState['']) {
+                        var errors = rejection.data.modelState[''];
+                        if (errors.length > 0) {
+                            toastr.error(errors[0]);
+                        }
+                    }
+
+                    return $q.reject(rejection);
+                }
+            }
+        }]);
 
     }])
-    .run([
-        '$rootScope',
-        '$location',
-        'authentication',
-        function ($rootScope, $location, authentication) {
-            $rootScope.$on('$routeChangeStart', function (event, nextRoute) {
-                if (nextRoute.access) {
-                    if (nextRoute.access.requiresLogin && !authentication.isAuthenticated()) {
-                        $location.path('/');
-                    }
+    .run(['$rootScope', '$location', 'authentication', function ($rootScope, $location, authentication) {
+        $rootScope.$on('$routeChangeError', function (ev, current, previous, rejection) {  
+            if (rejection === 'Not Authenticated') {
+                $location.path('/');
+            }
+        });
 
-                    if (nextRoute.access.requiresAdmin && !authentication.isAdmin()) {
-                        $location.path('/');
-                    }
-                } else {
-                    $location.path('/');
-                }
-            });
-        }])
+        authentication.refreshCookie();
+    }])
     .constant('toastr', toastr)
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');

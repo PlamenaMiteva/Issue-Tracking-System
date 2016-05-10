@@ -7,8 +7,10 @@ angular.module('issueTrackingSystem.issues', [
         $routeProvider.when('/issues/:id', {
             templateUrl: 'issues/issue.html',
             controller: 'IssueCtrl',
-            access: {
-                requiresLogin: true
+            resolve: {
+                'auth': function (authentication) {
+                    return authentication.isLoggedIn();
+                }
             }
         })
     }])

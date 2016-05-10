@@ -16,7 +16,7 @@ angular.module('issueTrackingSystem.home', ['ngRoute', 'ui.bootstrap', 'issueTra
         'authentication',
         'identity',
         function ($rootScope, $scope, $location, $uibModal, authentication, identity) {
-            $rootScope.auth =  authentication.isAuthenticated();
+            $rootScope.auth = authentication.isAuthenticated();          
 
                 identity.getCurrentUser()
                 .then(function (user) {
@@ -59,7 +59,10 @@ angular.module('issueTrackingSystem.home', ['ngRoute', 'ui.bootstrap', 'issueTra
 
             $scope.logout = function () {
                 authentication.logout();
-
+                sessionStorage.clear();
+                $rootScope.auth = false;
+                $rootScope.isAdmin = false;
+                console.log($rootScope.auth);
                 var modalInstance = $uibModal.open({
                     templateUrl: 'notification.html',
                     scope: function() {
@@ -69,8 +72,7 @@ angular.module('issueTrackingSystem.home', ['ngRoute', 'ui.bootstrap', 'issueTra
                     }(),
                     controller: 'ModalInstanceCtrl'
                 });
-
-                $rootScope.auth = authentication.isAuthenticated();
-                $location.path('#/');
+                $location.path('/');
             };
+                    
         }]);

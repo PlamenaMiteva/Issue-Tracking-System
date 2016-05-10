@@ -7,8 +7,10 @@ angular.module('issueTrackingSystem.edit-project', [
         $routeProvider.when('/projects/:id/edit', {
             templateUrl: 'projects/edit-project.html',
             controller: 'EditProjectCtrl',
-            access: {
-                requiresLogin: true
+            resolve: {
+                'auth': function (authentication) {
+                    return authentication.isLoggedIn();
+                }
             }
         })
     }])

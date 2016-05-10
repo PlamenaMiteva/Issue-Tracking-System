@@ -9,7 +9,12 @@ angular.module('issueTrackingSystem.profile', [
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/profile/password', {
             templateUrl: 'users/profile.html',
-            controller: 'ProfileCtrl'
+            controller: 'ProfileCtrl',
+            resolve: {
+                'auth': function (authentication) {
+                    return authentication.isLoggedIn();
+                }
+            }
         })
     }])
     .controller('ProfileCtrl', [

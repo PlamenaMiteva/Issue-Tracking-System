@@ -7,12 +7,14 @@ angular.module('issueTrackingSystem.add-issue', [
         $routeProvider.when('/projects/:id/add-issue', {
             templateUrl: 'issues/add-issue.html',
             controller: 'AddIssueCtrl',
-            access: {
-                requiresLogin: true
+            resolve: {
+                'auth': function (authentication) {
+                    return authentication.isLoggedIn();
+                }
             }
         })
     }])
-    .controller('AddIssueCtrl', [
+    .controller('AddIssueCtrl', [        
         '$scope',        
         '$location',
         '$routeParams',
@@ -21,7 +23,7 @@ angular.module('issueTrackingSystem.add-issue', [
         'project',
         'usersService',
         'label',        
-        function ($scope, $location, $routeParams, identity, issue, project, usersService, label) {            
+        function ($scope, $location, $routeParams, identity, issue, project, usersService, label) {
 
             project.getProjectById($routeParams.id)
                .then(function (project) {
@@ -33,19 +35,16 @@ angular.module('issueTrackingSystem.add-issue', [
                        }
                    });
 
+                   
                    usersService.getAllUsers()
                        .then(function (response) {
                            $scope.users = response.data;
                        });
-
                });
 
-
-            $scope.getAllLabels = function (val) {
-                var data = $http.defaults.headers.common.Authorization;
+            $scope.getAllLabels = function (val) {               
                 return label.getLabels(val);
             }
-
 
             $scope.addLabel = function addLabel(labels, newLabelName) {
                 var newLabel = {
@@ -145,6 +144,7 @@ angular.module('issueTrackingSystem.add-issue', [
                 input.ProjectId = projectId;
                 input.Labels = $scope.project.Labels;
                 input.DueDate = $scope.DueDate;
+                console.log(input);
                 issue.addIssue(projectId, input)
                     .then(function (result) {
                         $location.path('/issues/' + result.data.Id);

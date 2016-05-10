@@ -7,8 +7,10 @@ angular.module('issueTrackingSystem.adminProjects', [
         $routeProvider.when('/projects', {
             templateUrl: 'projects/allProjects.html',
             controller: 'adminProjectsCtrl',
-            access: {
-                requiresAdmin: true
+            resolve: {
+                'auth': function (authentication) {
+                    return authentication.isAdmin();
+                }
             }
         })
     }])
