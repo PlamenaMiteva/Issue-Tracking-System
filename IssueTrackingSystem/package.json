@@ -34,10 +34,14 @@
         "node": "4.4.x",
         "npm": "2.15.x"
     },
-    "buildpacks": 
+    "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    },
     {
       "url": "heroku/node.js"
-    },
+    }
+  ],
     "dependencies": {
         "angular-animate": "^1.5.5",
         "angular-cookies": "^1.5.5",
