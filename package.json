@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "description": "A starter project for AngularJS",
   "repository": "https://github.com/angular/angular-seed",
-  "license": "MIT",
+    "license": "MIT",
+    "start":"node app.js",
   "devDependencies": {
     "bower": "^1.3.1",
     "http-server": "^0.6.1",
