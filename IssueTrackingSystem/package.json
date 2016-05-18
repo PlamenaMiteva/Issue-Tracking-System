@@ -32,7 +32,11 @@
     },
     "engines": {
         "node": "4.4.x",
-        "npm":  "2.15.x"
+        "npm": "2.15.x"
+    },
+    "buildpacks": 
+    {
+      "url": "heroku/node.js"
     },
     "dependencies": {
         "angular-animate": "^1.5.5",
@@ -43,11 +47,5 @@
         "jQuery": "^1.7.4",
         "toastr": "^2.1.2",
         "ui-router": "^1.0.0-alpha.3"
-    },
-    
-  "buildpacks": [
-    {
-      "url": "heroku/node.js"
     }
-  ]
 }
