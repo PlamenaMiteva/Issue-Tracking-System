@@ -80,4 +80,4 @@ angular.module('issueTrackingSystem', [
         authentication.refreshCookie();
     }])
     .constant('toastr', toastr)
-    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');
+    .constant('BASE_URL', 'https://softuni-issue-tracker.azurewebsites.net/');
